@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Prompt Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .custom-radio input:checked + div {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+        
+        .custom-radio input:checked + div .icon-box {
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        /* Smooth transitions */
+        .transition-all-fast {
+            transition: all 0.2s ease-in-out;
+        }
+        
+        /* Tooltip style */
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: max-content;
+            background-color: #334155;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex justify-center items-start">
+
+    <div class="max-w-4xl w-full mx-auto space-y-8">
+        
+        <!-- Header -->
+        <div class="text-center space-y-2">
+            <h1 class="text-4xl md:text-5xl font-bold gradient-text pb-2">Dashboard Prompt Generator</h1>
+            <p class="text-slate-500 text-lg">เครื่องมือช่วยเขียนคำสั่ง (Prompt) สร้าง Dashboard สำหรับผู้เริ่มต้น (ไม่ต้องเขียนโค้ดเอง)</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Left Column: Form -->
+            <div class="glass-panel rounded-2xl p-6 md:p-8 space-y-8">
+                
+                <!-- Step 1: ประเภท Dashboard -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2 border-b pb-2">
+                        <span class="bg-blue-100 text-blue-600 font-bold rounded-full w-8 h-8 flex items-center justify-center">1</span>
+                        <h2 class="text-xl font-semibold text-slate-800">เลือกประเภท Dashboard</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Real-time Option -->
+                        <label class="custom-radio cursor-pointer relative">
+                            <input type="radio" name="dashboardType" value="realtime" class="peer sr-only" checked onchange="updateForm()">
+                            <div class="rounded-xl border-2 border-slate-200 p-4 hover:bg-slate-50 transition-all-fast h-full flex flex-col items-start gap-3">
+                                <div class="icon-box bg-slate-100 text-slate-500 p-3 rounded-lg transition-all-fast">
+                                    <i class="fa-solid fa-bolt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800 mb-1">Real-time Dashboard</h3>
+                                    <p class="text-sm text-slate-500 leading-relaxed">ข้อมูลอัปเดตอัตโนมัติ (เช่น จอแสดงคิว, สต็อกสินค้า)<br><span class="text-blue-500 font-medium text-xs mt-1 inline-block"><i class="fa-brands fa-google mr-1"></i>ใช้ Google Apps Script + Google Sheets</span></p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <!-- Non Real-time Option -->
+                        <label class="custom-radio cursor-pointer relative">
+                            <input type="radio" name="dashboardType" value="static" class="peer sr-only" onchange="updateForm()">
+                            <div class="rounded-xl border-2 border-slate-200 p-4 hover:bg-slate-50 transition-all-fast h-full flex flex-col items-start gap-3">
+                                <div class="icon-box bg-slate-100 text-slate-500 p-3 rounded-lg transition-all-fast">
+                                    <i class="fa-solid fa-chart-pie text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800 mb-1">Non-Realtime Dashboard</h3>
+                                    <p class="text-sm text-slate-500 leading-relaxed">สรุปข้อมูลประจำวัน/เดือน (เช่น ยอดขายรายเดือน)<br><span class="text-blue-500 font-medium text-xs mt-1 inline-block"><i class="fa-brands fa-html5 mr-1"></i>ใช้ HTML + Chart.js (แนบไฟล์ข้อมูล)</span></p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 2: แหล่งข้อมูล (Data Source) -->
+                <div class="space-y-4" id="dataSourceSection">
+                    <div class="flex items-center space-x-2 border-b pb-2">
+                        <span class="bg-blue-100 text-blue-600 font-bold rounded-full w-8 h-8 flex items-center justify-center">2</span>
+                        <h2 class="text-xl font-semibold text-slate-800">แหล่งข้อมูล (Data Source)</h2>
+                    </div>
+                    
+                    <!-- Real-time: Google Sheet Link -->
+                    <div id="gsheetInputContainer" class="transition-all-fast">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">ลิงก์ Google Sheets (แหล่งข้อมูลจริง) <span class="text-red-500">*</span></label>
+                            <input type="url" id="gsheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all-fast text-slate-700">
+                            <p class="text-xs text-slate-500 mt-2"><i class="fa-solid fa-circle-info mr-1"></i>ต้องใส่ลิงก์นี้เพื่อแทนการใช้ Mock Data และตั้งแชร์ลิงก์เป็น "Anyone with the link"</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <label class="block text-sm font-medium text-slate-700 mb-2">ชื่อ Sheet (Tab) ที่ใช้งาน <span class="text-red-500">*</span></label>
+                            <input type="text" id="sheetName" placeholder="เช่น Sheet1, ยอดขาย, Data" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all-fast text-slate-700">
+                        </div>
+
+                        <div class="mt-4">
+                            <label class="block text-sm font-medium text-slate-700 mb-2">คัดลอกชื่อหัวคอลัมน์ และ ข้อมูลแถวแรก มาวาง <span class="text-red-500">*</span></label>
+                            <textarea id="sheetDataSample" rows="3" placeholder="ตัวอย่าง:&#10;วันที่ | ชื่อลูกค้า | จำนวนคิว | สถานะ&#10;19/07/2026 | คุณสมชาย | A001 | รอเรียก" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all-fast text-slate-700 font-mono text-sm leading-relaxed"></textarea>
+                            <p class="text-xs text-slate-500 mt-2"><i class="fa-solid fa-lightbulb text-yellow-500 mr-1"></i>เคล็ดลับ: เข้าไปที่ Google Sheets ลากคลุมหัวตารางและข้อมูลแถวแรกลงมา 1 บรรทัด แล้วกด Copy (Ctrl+C) มาวาง (Ctrl+V) ได้เลย</p>
+                        </div>
+                    </div>
+
+                    <!-- Static: File Upload Info -->
+                    <div id="fileUploadInfoContainer" class="hidden transition-all-fast bg-blue-50 p-4 rounded-xl border border-blue-100">
+                        <div class="flex gap-3">
+                            <i class="fa-solid fa-paperclip text-blue-500 text-xl mt-1"></i>
+                            <div>
+                                <h4 class="font-semibold text-blue-800 text-sm">เตรียมแนบไฟล์ข้อมูลให้ AI (แทน Mock data)</h4>
+                                <p class="text-xs text-blue-700 mt-1">ใน Prompt จะสั่งให้ AI <strong>"ห้ามสร้าง Mock Data"</strong> และให้นำข้อมูลจาก <strong>ไฟล์ที่คุณจะแนบไปพร้อมกับ Prompt นี้</strong> มาฝังในโค้ดเพื่อสร้างกราฟให้เลย</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: วัตถุประสงค์ -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2 border-b pb-2">
+                        <span class="bg-blue-100 text-blue-600 font-bold rounded-full w-8 h-8 flex items-center justify-center">3</span>
+                        <h2 class="text-xl font-semibold text-slate-800">ใช้ทำอะไร? (ข้อมูลอะไร)</h2>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">อธิบายสั้นๆ ว่า Dashboard นี้แสดงข้อมูลเกี่ยวกับอะไร</label>
+                        <input type="text" id="dashboardObjective" placeholder="เช่น สรุปยอดขายรายวันของร้านกาแฟ, ระบบคิวคลินิกทันตกรรม, สต็อกสินค้าหลังบ้าน" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all-fast text-slate-700">
+                    </div>
+                </div>
+
+                <!-- Step 4: อยากให้มีกราฟหรือข้อมูลอะไรบ้าง -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2 border-b pb-2">
+                        <span class="bg-blue-100 text-blue-600 font-bold rounded-full w-8 h-8 flex items-center justify-center">4</span>
+                        <h2 class="text-xl font-semibold text-slate-800">อยากให้หน้าจอแสดงอะไรบ้าง?</h2>
+                    </div>
+                    
+                    <p class="text-sm text-slate-500 mb-2">เลือกสิ่งที่ต้องการให้แสดงบนหน้าจอ (เลือกได้หลายข้อ)</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="elementsContainer">
+                        <!-- Checkboxes will be populated by JS based on Dashboard Type -->
+                    </div>
+
+                    <!-- Custom Element Input -->
+                    <div class="mt-4 pt-3 border-t border-slate-100">
+                        <label class="block text-sm font-medium text-slate-700 mb-2">เพิ่มข้อมูลอื่นๆ ที่ต้องการ (ถ้ามี)</label>
+                        <textarea id="customElements" rows="2" placeholder="เช่น ขอให้มีปุ่ม 'รีเฟรชข้อมูล', อยากได้พื้นหลังสีเข้ม (Dark Mode)" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all-fast text-slate-700 text-sm"></textarea>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex gap-4">
+                    <!-- Reset Button -->
+                    <button onclick="resetForm()" class="w-1/3 bg-white hover:bg-slate-50 text-slate-600 border border-slate-300 font-semibold py-4 px-4 rounded-xl transition-all-fast flex items-center justify-center gap-2 text-lg">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        เริ่มใหม่
+                    </button>
+                    
+                    <!-- Generate Button -->
+                    <button onclick="generatePrompt()" class="w-2/3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all-fast transform hover:-translate-y-1 flex items-center justify-center gap-2 text-lg">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        สร้าง Prompt
+                    </button>
+                </div>
+                
+                <!-- Feedback Message -->
+                <div id="feedbackMsg" class="hidden text-center text-sm font-medium text-emerald-600 mt-2">
+                    <i class="fa-solid fa-check-circle mr-1"></i> คัดลอก Prompt แล้ว!
+                </div>
+            </div>
+
+            <!-- Right Column: Result / Output -->
+            <div class="glass-panel rounded-2xl p-6 md:p-8 flex flex-col h-full">
+                
+                <div class="flex justify-between items-center border-b pb-4 mb-4">
+                    <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-robot text-blue-500"></i>
+                        Prompt ที่ได้
+                    </h2>
+                    
+                    <button onclick="copyPrompt()" id="copyBtn" class="tooltip bg-slate-100 hover:bg-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm font-medium transition-all-fast flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i class="fa-regular fa-copy"></i>
+                        คัดลอก
+                        <span class="tooltip-text">คลิกเพื่อคัดลอกนำไปวางใน ChatGPT/Gemini/Claude</span>
+                    </button>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-5 flex-grow relative group min-h-[300px]">
+                    <!-- Placeholder when empty -->
+                    <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 p-6 text-center">
+                        <i class="fa-regular fa-comment-dots text-4xl mb-3 opacity-50"></i>
+                        <p>กรอกข้อมูลด้านซ้ายแล้วกด <br/>"สร้าง Prompt"</p>
+                    </div>
+
+                    <!-- Generated Prompt Output -->
+                    <div id="promptOutputContainer" class="hidden">
+                        <div class="text-blue-300 text-xs font-mono mb-2 border-b border-slate-700 pb-2 flex justify-between">
+                            <span>Target AI: ChatGPT / Gemini / Claude</span>
+                            <span id="outputTypeTag" class="bg-blue-900/50 px-2 py-0.5 rounded">Google Apps Script</span>
+                        </div>
+                        <textarea id="promptOutput" readonly class="w-full bg-transparent text-slate-200 font-mono text-sm resize-none outline-none leading-relaxed overflow-hidden" placeholder="Prompt จะปรากฏที่นี่..."></textarea>
+                    </div>
+                </div>
+                
+                <!-- Instructions Area -->
+                <div id="instructionArea" class="mt-4 bg-blue-50 rounded-xl p-4 border border-blue-100 hidden">
+                    <h4 class="font-bold text-blue-800 text-sm mb-2"><i class="fa-solid fa-lightbulb text-yellow-500 mr-1"></i> วิธีใช้งานต่อไป:</h4>
+                    <ol class="text-xs text-blue-900 space-y-1.5 list-decimal list-inside pl-1" id="instructionList">
+                        <!-- Populated by JS -->
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Options for Checkboxes based on Dashboard Type
+        const elementOptions = {
+            realtime: [
+                { id: 'rt-kpi', label: 'ตัวเลขสรุป (KPI Card)', icon: 'fa-table-cells-large', example: 'เช่น จำนวนคิว, ยอดขายวันนี้' },
+                { id: 'rt-table', label: 'ตารางข้อมูลล่าสุด', icon: 'fa-table', example: '5 รายการล่าสุด' },
+                { id: 'rt-status', label: 'สถานะ (ไฟสถานะ)', icon: 'fa-circle-dot', example: 'กำลังทำ, เสร็จแล้ว' },
+                { id: 'rt-line', label: 'กราฟเส้นแสดงแนวโน้ม', icon: 'fa-chart-line', example: 'ผู้ใช้งานรายชั่วโมง' },
+                { id: 'rt-clock', label: 'นาฬิกา / เวลาล่าสุด', icon: 'fa-clock', example: 'เวลาที่ดึงข้อมูล' },
+                { id: 'rt-alert', label: 'การแจ้งเตือน (Alert)', icon: 'fa-bell', example: 'ของใกล้หมด' }
+            ],
+            static: [
+                { id: 'st-kpi', label: 'สรุปตัวเลขรวม', icon: 'fa-calculator', example: 'ยอดขายรวม, กำไร' },
+                { id: 'st-bar', label: 'กราฟแท่งเปรียบเทียบ', icon: 'fa-chart-column', example: 'ยอดขายรายเดือน' },
+                { id: 'st-pie', label: 'กราฟวงกลมสัดส่วน', icon: 'fa-chart-pie', example: 'สัดส่วนสินค้าที่ขายดี' },
+                { id: 'st-line', label: 'กราฟเส้นแนวโน้ม', icon: 'fa-chart-line', example: 'แนวโน้มยอดขาย' },
+                { id: 'st-table', label: 'ตารางข้อมูล', icon: 'fa-table', example: 'ข้อมูลดิบ' },
+                { id: 'st-filter', label: 'ตัวกรองข้อมูล (Filter)', icon: 'fa-filter', example: 'เลือกเดือน/ปี' }
+            ]
+        };
+
+        // Initialize UI
+        document.addEventListener('DOMContentLoaded', () => {
+            updateForm();
+            document.getElementById('copyBtn').disabled = true;
+
+            // รีไซส์ Textarea เมื่อมีการย่อขยายหน้าต่าง
+            window.addEventListener('resize', () => {
+                const outputEl = document.getElementById('promptOutput');
+                if (outputEl.value && !document.getElementById('promptOutputContainer').classList.contains('hidden')) {
+                    outputEl.style.height = 'auto';
+                    outputEl.style.height = outputEl.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // Update form elements when switching Dashboard Type
+        function updateForm() {
+            const type = document.querySelector('input[name="dashboardType"]:checked').value;
+            const container = document.getElementById('elementsContainer');
+            // Toggle Data Source UI
+            const gsheetContainer = document.getElementById('gsheetInputContainer');
+            const fileInfoContainer = document.getElementById('fileUploadInfoContainer');
+            
+            if (type === 'realtime') {
+                gsheetContainer.classList.remove('hidden');
+                fileInfoContainer.classList.add('hidden');
+            } else {
+                gsheetContainer.classList.add('hidden');
+                fileInfoContainer.classList.remove('hidden');
+            }
+            
+            // Clear current options
+            container.innerHTML = '';
+            
+            // Populate new options
+            elementOptions[type].forEach(opt => {
+                const html = `
+                    <label class="flex items-start p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-all-fast">
+                        <div class="flex items-center h-5">
+                            <input type="checkbox" name="elements" value="${opt.label}" class="w-4 h-4 text-blue-600 bg-slate-100 border-slate-300 rounded focus:ring-blue-500">
+                        </div>
+                        <div class="ml-3">
+                            <span class="block text-sm font-medium text-slate-700"><i class="fa-solid ${opt.icon} mr-1.5 text-slate-400"></i>${opt.label}</span>
+                            <span class="block text-xs text-slate-500">${opt.example}</span>
+                        </div>
+                    </label>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        // Reset the form to initial state
+        function resetForm() {
+            // 1. Reset Dashboard Type to 'realtime'
+            document.querySelector('input[name="dashboardType"][value="realtime"]').checked = true;
+
+            // 2. Clear all input fields
+            document.getElementById('gsheetUrl').value = '';
+            if (document.getElementById('sheetName')) document.getElementById('sheetName').value = '';
+            if (document.getElementById('sheetDataSample')) document.getElementById('sheetDataSample').value = '';
+            document.getElementById('dashboardObjective').value = '';
+            document.getElementById('customElements').value = '';
+
+            // 3. Update form layout (resets checkboxes based on realtime type)
+            updateForm();
+
+            // 4. Remove any error styling that might be lingering
+            const inputIds = ['gsheetUrl', 'sheetName', 'sheetDataSample', 'dashboardObjective'];
+            inputIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
+                }
+            });
+
+            // 5. Hide Output and Show Empty State
+            document.getElementById('promptOutput').value = '';
+            document.getElementById('promptOutputContainer').classList.add('hidden');
+            document.getElementById('instructionArea').classList.add('hidden');
+            document.getElementById('emptyState').classList.remove('hidden');
+
+            // 6. Reset Copy Button
+            const copyBtn = document.getElementById('copyBtn');
+            copyBtn.disabled = true;
+            copyBtn.classList.add('bg-slate-100', 'text-slate-600');
+            copyBtn.classList.remove('bg-blue-600', 'text-white', 'hover:bg-blue-700', 'bg-emerald-500', 'hover:bg-emerald-600');
+            copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> คัดลอก';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Generate the Prompt
+        function generatePrompt() {
+            const type = document.querySelector('input[name="dashboardType"]:checked').value;
+            const objective = document.getElementById('dashboardObjective').value.trim();
+            const gsheetUrl = document.getElementById('gsheetUrl').value.trim();
+            const sheetName = document.getElementById('sheetName') ? document.getElementById('sheetName').value.trim() : '';
+            const sheetDataSample = document.getElementById('sheetDataSample') ? document.getElementById('sheetDataSample').value.trim() : '';
+            
+            // Get selected elements
+            const checkboxes = document.querySelectorAll('input[name="elements"]:checked');
+            const selectedElements = Array.from(checkboxes).map(cb => cb.value);
+            
+            const customElements = document.getElementById('customElements').value.trim();
+
+            if (type === 'realtime') {
+                if (!gsheetUrl) {
+                    const inputEl = document.getElementById('gsheetUrl');
+                    inputEl.classList.add('border-red-500', 'ring-2', 'ring-red-200');
+                    inputEl.placeholder = "กรุณาวางลิงก์ Google Sheets ก่อนครับ";
+                    setTimeout(() => {
+                        inputEl.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
+                        inputEl.placeholder = "https://docs.google.com/spreadsheets/d/...";
+                    }, 2000);
+                    return;
+                }
+                
+                if (!sheetName) {
+                    const inputEl = document.getElementById('sheetName');
+                    inputEl.classList.add('border-red-500', 'ring-2', 'ring-red-200');
+                    inputEl.placeholder = "กรุณาระบุชื่อ Sheet ครับ";
+                    setTimeout(() => {
+                        inputEl.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
+                        inputEl.placeholder = "เช่น Sheet1, ยอดขาย, Data";
+                    }, 2000);
+                    return;
+                }
+
+                if (!sheetDataSample) {
+                    const inputEl = document.getElementById('sheetDataSample');
+                    inputEl.classList.add('border-red-500', 'ring-2', 'ring-red-200');
+                    inputEl.placeholder = "กรุณาวางตัวอย่างข้อมูล (หัวคอลัมน์ + แถวแรก) ครับ";
+                    setTimeout(() => {
+                        inputEl.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
+                    }, 2000);
+                    return;
+                }
+            }
+
+            if (!objective) {
+                // Simple validation - using custom UI instead of alert()
+                const inputEl = document.getElementById('dashboardObjective');
+                inputEl.classList.add('border-red-500', 'ring-2', 'ring-red-200');
+                inputEl.placeholder = "กรุณาระบุวัตถุประสงค์ก่อนครับ (เช่น สรุปยอดขาย)";
+                setTimeout(() => {
+                    inputEl.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
+                }, 2000);
+                return;
+            }
+
+            let prompt = "";
+            
+            if (type === 'realtime') {
+                prompt = `คุณเป็น Expert Web Developer และ Google Apps Script Developer ช่วยเขียนโค้ดเพื่อสร้าง "Real-time Dashboard" ให้หน่อยครับ\n\n`;
+                prompt += `📌 วัตถุประสงค์ของ Dashboard:\n"${objective}"\n\n`;
+                
+                prompt += `📂 แหล่งข้อมูล (Data Source):\n`;
+                prompt += `- ❌ คำเตือนสำคัญ: ห้ามสร้างข้อมูลจำลอง (Mock Data) ภายในโค้ดเด็ดขาด\n`;
+                prompt += `- ✅ ให้ดึงข้อมูลจาก Google Sheets ลิงก์นี้ไปใช้งานเท่านั้น: ${gsheetUrl}\n`;
+                prompt += `- 📌 ดึงข้อมูลจาก Sheet (Tab) ชื่อ: "${sheetName}"\n`;
+                prompt += `- 📊 โครงสร้างข้อมูล (หัวคอลัมน์ และ ตัวอย่างข้อมูลแถวแรก):\n`;
+                prompt += `\`\`\`\n${sheetDataSample}\n\`\`\`\n\n`;
+
+                prompt += `🛠️ เทคโนโลยีที่ต้องการใช้:\n`;
+                prompt += `- Backend: Google Apps Script (ดึงข้อมูลจากลิงก์ Google Sheets ที่ให้ไป โดยอ้างอิงชื่อคอลัมน์จากข้อมูลตัวอย่าง)\n`;
+                prompt += `- Frontend: HTML, CSS (Tailwind CSS สวยๆ ใช้งานง่าย), Javascript\n`;
+                prompt += `- ขอให้ออกแบบเป็น Single Page Application (รวมโค้ด HTML/CSS/JS ไว้ในหน้าเดียวกันเพื่อให้เอาไปแปะใน Google Apps Script ได้ง่าย)\n\n`;
+                
+                prompt += `📊 สิ่งที่ต้องการให้แสดงในหน้า Dashboard (UI/UX):\n`;
+                if (selectedElements.length > 0) {
+                    selectedElements.forEach(el => prompt += `- ${el}\n`);
+                } else {
+                    prompt += `- จัดหน้าจอให้สวยงามและเหมาะสมกับข้อมูล\n`;
+                }
+                
+                if (customElements) {
+                    prompt += `\n✨ ความต้องการเพิ่มเติม:\n${customElements}\n`;
+                }
+
+                prompt += `\n🔄 ระบบ Real-time:\n`;
+                prompt += `- เขียน JavaScript ให้มีการดึงข้อมูลใหม่จาก Google Sheets ทุกๆ 5 วินาที (Auto-refresh) โดยไม่ต้องโหลดหน้าเว็บใหม่ (ใช้ google.script.run)\n`;
+                prompt += `- ระหว่างดึงข้อมูลให้มี Loading Indicator เล็กๆ ให้รู้ว่ากำลังอัปเดต\n\n`;
+
+                prompt += `📝 สิ่งที่ต้องการให้คุณตอบกลับ:\n`;
+                prompt += `1. โค้ดสำหรับไฟล์ Code.gs (Google Apps Script)\n`;
+                prompt += `2. โค้ดสำหรับไฟล์ index.html (ใส่ Tailwind CDN มาด้วย)\n`;
+                prompt += `3. คำอธิบายสั้นๆ ว่าฉันต้องเอาโค้ดไปวางตรงไหนบ้าง สำหรับคนที่ไม่เคยเขียนโค้ดมาก่อน`;
+
+                // Update UI hints
+                document.getElementById('outputTypeTag').textContent = "Google Apps Script";
+                document.getElementById('instructionList').innerHTML = `
+                    <li>ตรวจสอบให้แน่ใจว่า Google Sheets ของคุณแชร์เป็น <strong>Anyone with the link (ทุกคนที่มีลิงก์)</strong> แล้ว</li>
+                    <li>กดปุ่ม <strong>"คัดลอก"</strong> ด้านบน</li>
+                    <li>เปิด <a href="https://chatgpt.com/" target="_blank" class="text-blue-600 underline">ChatGPT</a>, <a href="https://gemini.google.com/" target="_blank" class="text-blue-600 underline">Gemini</a> หรือ <a href="https://claude.ai/" target="_blank" class="text-blue-600 underline">Claude</a></li>
+                    <li>วางคำสั่งนี้ลงไป แล้วรอ AI เขียนโค้ดให้!</li>
+                    <li>นำโค้ดไปวางในส่วน Extensions > Apps Script ใน Google Sheets ของคุณตามคำแนะนำของ AI</li>
+                `;
+
+            } else {
+                prompt = `คุณเป็น Expert Frontend Developer ช่วยสร้าง "Non-Realtime Dashboard" แบบเว็บหน้าเดียวให้หน่อยครับ (เขียนโค้ดให้อยู่ในไฟล์เดียวจบ)\n\n`;
+                prompt += `📌 วัตถุประสงค์ของ Dashboard:\n"${objective}"\n\n`;
+                
+                prompt += `📂 แหล่งข้อมูล (Data Source):\n`;
+                prompt += `- ❌ คำเตือนสำคัญ: ห้ามสร้างข้อมูลจำลอง (Mock Data) สุ่มมั่วๆ ภายในโค้ดเด็ดขาด\n`;
+                prompt += `- ✅ ฉันได้แนบไฟล์ข้อมูล (เช่น CSV, Excel) มาพร้อมกับข้อความนี้แล้ว โปรดวิเคราะห์ข้อมูลจากไฟล์ที่แนบมา\n`;
+                prompt += `- ให้แปลงข้อมูลจากไฟล์ที่ฉันแนบมา เป็นตัวแปร JavaScript (เช่น Array/JSON) ฝังไว้ในโค้ดได้เลย เพื่อให้ Dashboard มีข้อมูลจริงแสดงผลทันทีที่เปิดไฟล์หน้าเว็บ\n\n`;
+
+                prompt += `🛠️ เทคโนโลยีที่ต้องการใช้:\n`;
+                prompt += `- HTML, CSS (ใช้ Tailwind CSS ผ่าน CDN เพื่อความสวยงาม)\n`;
+                prompt += `- JavaScript และ Chart.js (ผ่าน CDN) สำหรับวาดกราฟ\n\n`;
+                
+                prompt += `📊 สิ่งที่ต้องการให้แสดงในหน้า Dashboard (จัด Layout ให้สวยงาม):\n`;
+                if (selectedElements.length > 0) {
+                    selectedElements.forEach(el => prompt += `- ${el}\n`);
+                } else {
+                    prompt += `- ออกแบบกราฟและตัวเลขสรุปให้เหมาะสมกับข้อมูล\n`;
+                }
+                
+                if (customElements) {
+                    prompt += `\n✨ ความต้องการเพิ่มเติม:\n${customElements}\n`;
+                }
+
+                prompt += `\n🎨 การออกแบบ (UI/UX):\n`;
+                prompt += `- ออกแบบให้ดู Modern, สะอาดตา, อ่านง่าย\n`;
+                prompt += `- รองรับการดูบนมือถือ (Responsive)\n\n`;
+
+                prompt += `📝 สิ่งที่ต้องการให้คุณตอบกลับ:\n`;
+                prompt += `1. โค้ด HTML ทั้งหมด (รวม CSS/JS และข้อมูลที่แปลงแล้วไว้ในไฟล์เดียว) ที่สามารถ Save เป็นไฟล์ .html แล้วดับเบิ้ลคลิกเปิดดูใน Browser ได้ผลลัพธ์ทันที\n`;
+                prompt += `2. คำแนะนำสั้นๆ เพิ่มเติม (ถ้ามี)`;
+
+                // Update UI hints
+                document.getElementById('outputTypeTag').textContent = "HTML + Chart.js (ฝังข้อมูลจริงจากไฟล์)";
+                document.getElementById('instructionList').innerHTML = `
+                    <li>เตรียมไฟล์ข้อมูลของคุณ (เช่น CSV หรือ Excel) เอาไว้ในเครื่อง</li>
+                    <li>กดปุ่ม <strong>"คัดลอก"</strong> Prompt ด้านบน นำไปวางใน AI (เช่น ChatGPT, Claude)</li>
+                    <li><strong>สำคัญมาก:</strong> กดปุ่ม <strong>"แนบไฟล์ (Attach)"</strong> เพื่ออัปโหลดไฟล์ข้อมูลของคุณไปให้ AI พร้อมกับข้อความด้วย</li>
+                    <li>ก็อปปี้โค้ดที่ AI สร้าง ไปเซฟเป็นไฟล์ชื่อ <code class="bg-blue-100 px-1 rounded">dashboard.html</code> แล้วดับเบิ้ลคลิกเปิดดูผลลัพธ์ได้เลย!</li>
+                `;
+            }
+
+            // Show Output
+            const outputEl = document.getElementById('promptOutput');
+            outputEl.value = prompt;
+            
+            document.getElementById('emptyState').classList.add('hidden');
+            document.getElementById('promptOutputContainer').classList.remove('hidden');
+            
+            // ปรับความสูงของ Textarea อัตโนมัติตามเนื้อหา (ไม่ให้มี scrollbar)
+            outputEl.style.height = 'auto';
+            outputEl.style.height = outputEl.scrollHeight + 'px';
+
+            document.getElementById('instructionArea').classList.remove('hidden');
+            
+            // Enable Copy Button
+            const copyBtn = document.getElementById('copyBtn');
+            copyBtn.disabled = false;
+            copyBtn.classList.remove('bg-slate-100', 'text-slate-600');
+            copyBtn.classList.add('bg-blue-600', 'text-white', 'hover:bg-blue-700');
+        }
+
+        // Copy to clipboard
+        function copyPrompt() {
+            const outputEl = document.getElementById('promptOutput');
+            
+            if(!outputEl.value) return;
+
+            outputEl.select();
+            outputEl.setSelectionRange(0, 99999); /* For mobile devices */
+
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(outputEl.value)
+                    .then(showCopySuccess)
+                    .catch(err => {
+                        // Catch promise rejection (usually due to iframe permissions)
+                        console.warn('Modern Clipboard API blocked or failed. Using fallback.', err);
+                        fallbackCopy();
+                    });
+            } else {
+                // Fallback for older browsers
+                fallbackCopy();
+            }
+        }
+
+        // Fallback copy function
+        function fallbackCopy() {
+            try {
+                document.execCommand('copy');
+                showCopySuccess();
+            } catch (err) {
+                console.error('Fallback copy failed: ', err);
+            }
+        }
+
+        function showCopySuccess() {
+            const feedback = document.getElementById('feedbackMsg');
+            const copyBtn = document.getElementById('copyBtn');
+            const originalIcon = copyBtn.innerHTML;
+            
+            feedback.classList.remove('hidden');
+            feedback.classList.add('animate-pulse');
+            
+            copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> คัดลอกแล้ว';
+            copyBtn.classList.replace('bg-blue-600', 'bg-emerald-500');
+            copyBtn.classList.replace('hover:bg-blue-700', 'hover:bg-emerald-600');
+
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+                feedback.classList.remove('animate-pulse');
+                
+                // Reset button style
+                copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> คัดลอก';
+                copyBtn.classList.replace('bg-emerald-500', 'bg-blue-600');
+                copyBtn.classList.replace('hover:bg-emerald-600', 'hover:bg-blue-700');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
