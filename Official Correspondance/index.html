@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Prompt Generator สร้างเอกสารงานบุคคล</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Sarabun', 'sans-serif'],
+                    },
+                    colors: {
+                        // Using an Indigo/Corporate blue theme suitable for HR
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #f8fafc; /* Slate 50 */
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #cbd5e1; /* Slate 300 */
+            transition: all 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+            color: #334155; /* Slate 700 */
+        }
+        
+        /* Custom scrollbar for textarea */
+        textarea::-webkit-scrollbar {
+            width: 8px;
+        }
+        textarea::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+            border-radius: 4px;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        textarea::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen py-8 px-4 sm:px-6 lg:px-8 flex justify-center items-start">
+
+    <div class="max-w-5xl w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
+        
+        <!-- Header -->
+        <div class="bg-primary-700 text-white p-6 sm:p-8 text-center relative overflow-hidden">
+            <!-- Decorative background element -->
+            <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-white opacity-5"></div>
+            
+            <h1 class="text-3xl font-bold mb-2 flex justify-center items-center gap-3 relative z-10">
+                <i class="fa-solid fa-users-gear"></i> 
+                HR Prompt Generator
+            </h1>
+            <p class="text-primary-100 text-lg relative z-10">เครื่องมือสร้าง Prompt สำหรับ AI ร่างเอกสารและประกาศงานทรัพยากรบุคคล</p>
+        </div>
+
+        <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 bg-slate-50">
+            
+            <!-- Left Column: Input Form (Takes up 5 columns on large screens) -->
+            <div class="lg:col-span-5 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-xl font-bold mb-6 text-slate-800 border-b pb-3 border-slate-100 flex items-center">
+                    <span class="bg-primary-100 text-primary-600 p-2 rounded-lg mr-3">
+                        <i class="fa-solid fa-file-contract"></i>
+                    </span>
+                    ข้อมูลเอกสาร HR
+                </h2>
+                
+                <form id="promptForm" class="space-y-4">
+                    <!-- ประเภทเอกสาร -->
+                    <div>
+                        <label for="docType" class="form-label">ประเภทเอกสาร <span class="text-red-500">*</span></label>
+                        <select id="docType" class="form-input bg-white cursor-pointer" required>
+                            <option value="" disabled selected>เลือกประเภทเอกสาร/ประกาศ...</option>
+                            <optgroup label="สรรหาและว่าจ้าง">
+                                <option value="ประกาศรับสมัครงาน (Job Posting)">ประกาศรับสมัครงาน</option>
+                                <option value="จดหมายเชิญสัมภาษณ์งาน (Interview Invitation)">จดหมายเชิญสัมภาษณ์งาน</option>
+                                <option value="จดหมายเสนองาน / ตอบรับเข้าทำงาน (Job Offer)">จดหมายเสนองาน (Job Offer)</option>
+                                <option value="จดหมายแจ้งผลการสัมภาษณ์ (Rejection Letter)">จดหมายแจ้งผลการสัมภาษณ์ (Rejection)</option>
+                            </optgroup>
+                            <optgroup label="เอกสารภายใน/นโยบาย">
+                                <option value="ประกาศนโยบายบริษัท / กฎระเบียบ (Company Policy)">ประกาศนโยบาย / กฎระเบียบบริษัท</option>
+                                <option value="บันทึกข้อความภายใน (Internal Memo)">บันทึกข้อความภายในแจ้งข่าวสาร</option>
+                                <option value="คำสั่งแต่งตั้ง / โยกย้ายพนักงาน (Appointment/Transfer)">คำสั่งแต่งตั้ง / โยกย้าย / เลื่อนตำแหน่ง</option>
+                            </optgroup>
+                            <optgroup label="บริการพนักงานและพ้นสภาพ">
+                                <option value="หนังสือรับรองการทำงาน / เงินเดือน (Employment Certificate)">หนังสือรับรองการทำงาน / เงินเดือน</option>
+                                <option value="หนังสือตักเตือนพนักงาน (Warning Letter)">หนังสือตักเตือนพนักงาน (Warning Letter)</option>
+                                <option value="หนังสือบอกเลิกจ้าง (Termination Letter)">หนังสือบอกเลิกจ้าง (Termination Letter)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- ชื่อหน่วยงาน/ผู้ส่ง -->
+                    <div>
+                        <label for="senderOrg" class="form-label">จาก (ผู้ส่ง / แผนก) <span class="text-red-500">*</span></label>
+                        <input type="text" id="senderOrg" class="form-input" placeholder="เช่น แผนกทรัพยากรบุคคล (HR), ผู้บริหาร..." required>
+                    </div>
+
+                    <!-- ชื่อผู้รับ -->
+                    <div>
+                        <label for="receiver" class="form-label">ถึง (ผู้รับ / กลุ่มเป้าหมาย) <span class="text-red-500">*</span></label>
+                        <input type="text" id="receiver" class="form-input" placeholder="เช่น พนักงานทุกคน, ผู้สมัครงาน, คุณ[ชื่อพนักงาน]" required>
+                    </div>
+
+                    <!-- เรื่อง (Subject) -->
+                    <div>
+                        <label for="subject" class="form-label">หัวข้อ / เรื่อง <span class="text-red-500">*</span></label>
+                        <input type="text" id="subject" class="form-input" placeholder="เช่น แจ้งนโยบายการลาพักร้อนปี 2024" required>
+                    </div>
+
+                    <!-- สิ่งที่ส่งมาด้วย -->
+                    <div>
+                        <label for="attachments" class="form-label">สิ่งที่ส่งมาด้วย / เอกสารแนบ (ถ้ามี)</label>
+                        <input type="text" id="attachments" class="form-input" placeholder="เช่น แบบฟอร์มขอเบิกจ่าย, คู่มือพนักงาน">
+                    </div>
+
+                    <!-- ข้อความเนื้อหา -->
+                    <div>
+                        <label for="content" class="form-label">รายละเอียด / ประเด็นสำคัญที่ต้องการสื่อสาร <span class="text-red-500">*</span></label>
+                        <textarea id="content" rows="5" class="form-input resize-none" placeholder="อธิบายประเด็นสำคัญที่ต้องการแจ้ง เช่น คุณสมบัติตำแหน่งงาน, กฎระเบียบที่เปลี่ยนไป, ข้อผิดพลาดที่นำมาสู่การตักเตือน พร้อมระบุวันที่หรือเงื่อนไขสำคัญ..." required></textarea>
+                    </div>
+
+                    <!-- การลงชื่อ -->
+                    <div>
+                        <label for="signatory" class="form-label">ลงชื่อ (ผู้มีอำนาจลงนาม) <span class="text-red-500">*</span></label>
+                        <input type="text" id="signatory" class="form-input" placeholder="เช่น (ชื่อ-นามสกุล) ผู้อำนวยการฝ่าย HR" required>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-3 mt-6">
+                        <button type="reset" class="sm:w-1/3 bg-white hover:bg-slate-50 text-slate-600 font-bold py-3.5 px-4 rounded-xl transition-all duration-200 flex justify-center items-center gap-2 shadow-sm border border-slate-200">
+                            <i class="fa-solid fa-rotate-right"></i> ล้างข้อมูล
+                        </button>
+                        <button type="submit" class="sm:w-2/3 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 px-4 rounded-xl transition-all duration-200 flex justify-center items-center gap-2 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> สร้าง Prompt สำหรับงาน HR
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Column: Result Box (Takes up 7 columns on large screens) -->
+            <div class="lg:col-span-7 flex flex-col h-full bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-xl font-bold mb-6 text-slate-800 border-b pb-3 border-slate-100 flex items-center">
+                    <span class="bg-emerald-100 text-emerald-600 p-2 rounded-lg mr-3">
+                        <i class="fa-solid fa-robot"></i>
+                    </span>
+                    ผลลัพธ์ Prompt
+                </h2>
+                
+                <div class="relative flex-grow flex flex-col min-h-[450px]">
+                    <div id="emptyState" class="absolute inset-0 flex flex-col justify-center items-center text-slate-400 bg-slate-50 rounded-xl border-2 border-dashed border-slate-300 z-10 transition-opacity duration-300">
+                        <div class="bg-white p-4 rounded-full shadow-sm mb-4">
+                            <i class="fa-solid fa-clipboard-list text-4xl text-slate-300"></i>
+                        </div>
+                        <p class="text-center px-4 font-medium text-slate-500">กรอกข้อมูลด้านซ้ายให้ครบถ้วน<br>แล้วกดปุ่ม "สร้าง Prompt สำหรับงาน HR"</p>
+                    </div>
+                    
+                    <textarea id="promptResult" class="form-input flex-grow h-full resize-none font-mono text-[15px] leading-relaxed p-5 bg-slate-800 text-slate-100 focus:bg-slate-900 border-none rounded-xl shadow-inner selection:bg-primary-500 selection:text-white" readonly></textarea>
+                </div>
+                
+                <!-- ปุ่มคัดลอกแบบใหม่ -->
+                <button id="copyBtn" class="mt-4 w-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-3.5 px-4 rounded-xl transition-colors flex justify-center items-center gap-2 shadow-sm text-lg disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    <i class="fa-regular fa-copy"></i> คัดลอก Prompt
+                </button>
+                
+                <div class="mt-4 text-sm text-primary-700 bg-primary-50 p-4 rounded-xl border border-primary-100 flex items-start gap-3">
+                    <i class="fa-solid fa-lightbulb text-primary-500 mt-1 text-lg"></i>
+                    <p class="leading-relaxed"><strong>วิธีใช้งาน:</strong> นำข้อความ Prompt ด้านบนไปวางใน AI Chatbot (เช่น ChatGPT, Gemini, Claude) เพื่อให้ AI ร่างเอกสารให้คุณ จากนั้นค่อยนำผลลัพธ์มาปรับแก้รายละเอียดเล็กน้อยก่อนนำไปใช้งานจริง</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('promptForm');
+            const promptResult = document.getElementById('promptResult');
+            const emptyState = document.getElementById('emptyState');
+            const copyBtn = document.getElementById('copyBtn');
+
+            // ฟังก์ชัน Reset ฟอร์มและหน้าจอผลลัพธ์กลับสู่ค่าเริ่มต้น
+            form.addEventListener('reset', function() {
+                // ล้างค่าในช่องข้อความผลลัพธ์
+                promptResult.value = "";
+                
+                // นำหน้าจอ Empty State กลับมาแสดง
+                emptyState.style.display = 'flex';
+                setTimeout(() => {
+                    emptyState.style.opacity = '1';
+                }, 10);
+                
+                // ปิดการใช้งานปุ่มคัดลอกและคืนค่าสีเดิม
+                copyBtn.disabled = true;
+                copyBtn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700', 'text-white');
+                copyBtn.classList.add('bg-slate-200', 'hover:bg-slate-300', 'text-slate-800');
+                copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> คัดลอก Prompt';
+            });
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // ดึงข้อมูลจากฟอร์ม
+                const docType = document.getElementById('docType').value;
+                const senderOrg = document.getElementById('senderOrg').value;
+                const receiver = document.getElementById('receiver').value;
+                const subject = document.getElementById('subject').value;
+                const attachments = document.getElementById('attachments').value;
+                const content = document.getElementById('content').value;
+                const signatory = document.getElementById('signatory').value;
+
+                // จัดการส่วน "สิ่งที่ส่งมาด้วย"
+                let attachmentText = "";
+                if (attachments.trim() !== "") {
+                    attachmentText = `\n- สิ่งที่ส่งมาด้วย: ${attachments}`;
+                }
+
+                // สร้าง Prompt String ตามโครงสร้าง RCCF (Role, Context, Constraint, Format)
+                const promptTemplate = `[Role]
+คุณคือผู้จัดการฝ่ายทรัพยากรบุคคล (Senior HR Manager) ที่มีประสบการณ์มากกว่า 10 ปี เชี่ยวชาญด้านการสื่อสารองค์กร กฎหมายแรงงาน และการร่างเอกสารงานบุคคลระดับมืออาชีพ
+
+[Context]
+เป้าหมายของงานนี้คือการร่าง "${docType}" 
+- ผู้ส่ง (จาก): ${senderOrg}
+- กลุ่มเป้าหมายผู้รับ (ถึง): ${receiver}
+- หัวข้อ/เรื่อง: ${subject}${attachmentText}
+- รายละเอียดและวัตถุประสงค์หลักที่ต้องสื่อสาร: ${content}
+
+[Constraint]
+1. ปรับโทนภาษาให้ตรงกับประเภทเอกสาร (เชิงบวก = สร้างแรงจูงใจ/ยินดี, เชิงลบ/บังคับใช้ = เป็นทางการ รัดกุม ชัดเจน และสอดคล้องกับหลักกฎหมายแรงงาน)
+2. ใช้ภาษาที่สุภาพ กระชับ อ่านเข้าใจง่าย หลีกเลี่ยงความเยิ่นเย้อ
+3. เว้นช่องว่าง (เช่น [ระบุวันที่], [ชื่อพนักงาน]) ไว้เฉพาะจุดที่จำเป็นต้องเติมข้อมูลส่วนบุคคลเท่านั้น
+4. ห้ามพิมพ์ข้อความเกริ่นนำ ห้ามสรุป หรืออธิบายวิธีการทำงานของคุณ ให้แสดงเฉพาะตัวผลลัพธ์เท่านั้น
+
+[Format]
+สร้างผลลัพธ์เป็น "เอกสารฉบับร่าง (Draft)" ที่สมบูรณ์พร้อมนำไปใช้งาน โดยมีโครงสร้างดังนี้:
+- ส่วนหัว: (เว้นที่สำหรับวันที่, เรื่อง, เรียน, สิ่งที่ส่งมาด้วยถ้ามี)
+- ส่วนเนื้อหา: (แบ่งย่อหน้าให้ชัดเจน หากมีข้อกำหนดหลายข้อให้ใช้ Bullet points เพื่อให้อ่านง่าย)
+- ส่วนลงท้าย: (ใช้คำลงท้ายที่เหมาะสมกับบริบท)
+- ลงชื่อผู้มีอำนาจ: ${signatory}`;
+
+                // แสดงผลลัพธ์
+                promptResult.value = promptTemplate;
+                
+                // ซ่อน Empty State และเปิดปุ่ม Copy
+                emptyState.style.opacity = '0';
+                setTimeout(() => {
+                    emptyState.style.display = 'none';
+                }, 300);
+                
+                copyBtn.disabled = false;
+                
+                // สลับสีปุ่ม Copy กลับมาเป็นสีเดิมเผื่อว่าเคยกดไปแล้ว
+                copyBtn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700', 'text-white');
+                copyBtn.classList.add('bg-slate-200', 'hover:bg-slate-300', 'text-slate-800');
+                copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> คัดลอก Prompt';
+                
+                // เลื่อนหน้าจอลงมาให้เห็นผลลัพธ์บนมือถือ
+                if (window.innerWidth < 1024) {
+                    promptResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+
+            // ฟังก์ชัน Copy to Clipboard
+            copyBtn.addEventListener('click', function() {
+                if (promptResult.value.trim() === "") return;
+
+                // เลือกข้อความ
+                promptResult.select();
+                promptResult.setSelectionRange(0, 99999); // สำหรับมือถือ
+
+                try {
+                    // Copy ลง Clipboard
+                    document.execCommand('copy');
+                    
+                    // ยกเลิกการเลือก
+                    window.getSelection().removeAllRanges();
+                    
+                    // เปลี่ยนสถานะปุ่มเป็นสีเขียว
+                    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> คัดลอกสำเร็จแล้ว!';
+                    copyBtn.classList.remove('bg-slate-200', 'hover:bg-slate-300', 'text-slate-800');
+                    copyBtn.classList.add('bg-emerald-600', 'hover:bg-emerald-700', 'text-white');
+
+                    // คืนค่าปุ่มเดิมหลังจาก 2.5 วินาที
+                    setTimeout(function() {
+                        copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> คัดลอก Prompt';
+                        copyBtn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700', 'text-white');
+                        copyBtn.classList.add('bg-slate-200', 'hover:bg-slate-300', 'text-slate-800');
+                    }, 2500);
+                } catch (err) {
+                    console.error('ไม่สามารถคัดลอกข้อความได้: ', err);
+                    // ใช้ Fallback เปลี่ยนข้อความชั่วคราว
+                    copyBtn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> กรุณาคลุมดำเพื่อคัดลอก';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
