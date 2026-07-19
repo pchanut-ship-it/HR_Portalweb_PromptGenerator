@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เครื่องมือสร้าง Prompt วิเคราะห์ผลประเมิน HR (RCCF Framework)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Sarabun', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 p-4 md:p-8">
+    <div class="max-w-5xl mx-auto space-y-6">
+        <div class="text-center space-y-2">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                เครื่องมือสร้าง Prompt วิเคราะห์ผลประเมิน (RCCF)
+            </h1>
+            <p class="text-slate-500 text-lg">สำหรับงาน HR และการบริหารทรัพบุคคล</p>
+        </div>
+
+        <div class="grid md:grid-cols-12 gap-6 items-start mt-8">
+            <div class="md:col-span-5 space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h2 class="text-xl font-bold mb-4 text-slate-800">ตั้งค่าข้อมูลโครงการ</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700">ชื่อโครงการ / กิจกรรม</label>
+                            <input type="text" id="projectName" placeholder="เช่น โครงการสำรวจความผูกพันพนักงาน 2024" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700">สเกลคะแนน</label>
+                            <input type="text" id="scoreScale" placeholder="เช่น 1-5" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-blue-50 p-4 rounded-xl border border-blue-100 flex gap-3 text-sm text-blue-800">
+                        <svg class="shrink-0 text-blue-500" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        <p>
+                            <strong>วิธีใช้งาน:</strong> <br/>
+                            1. กรอกข้อมูล <br/>
+                            2. กด <b>"สร้าง Prompt"</b> <br/>
+                            3. กด <b>"คัดลอก Prompt"</b> และนำไปวางใน AI <b>พร้อมแนบไฟล์ Excel</b>
+                        </p>
+                    </div>
+                </div>
+
+                <button id="generateBtn" class="w-full py-3.5 rounded-xl font-bold bg-blue-600 text-white hover:bg-blue-700 transition-all">
+                    สร้าง Prompt สำหรับ AI
+                </button>
+            </div>
+
+            <div class="md:col-span-7">
+                <div id="previewContainer" class="bg-[#1e293b] rounded-2xl shadow-xl border border-slate-700 overflow-hidden flex flex-col h-[600px]">
+                    <div class="bg-slate-800 px-4 py-3 border-b border-slate-700 flex justify-between items-center">
+                        <h2 class="text-sm font-semibold text-slate-300">ตัวอย่าง Prompt (RCCF)</h2>
+                        <button id="copyBtn" class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-1.5 rounded-lg text-sm font-bold transition-all">
+                            <span id="copyBtnText">คัดลอก Prompt</span>
+                        </button>
+                    </div>
+                    <div id="promptPreview" class="p-6 overflow-y-auto flex-1 text-slate-300 font-mono text-sm leading-relaxed whitespace-pre-wrap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const getPromptText = () => {
+            const pName = document.getElementById('projectName').value || '[ชื่อโครงการ]';
+            const sScale = document.getElementById('scoreScale').value || '[สเกลคะแนน]';
+            return `[RCCF Framework Prompt]
+
+R - Role (บทบาท): 
+คุณคือ HR Data Analyst ผู้เชี่ยวชาญการวิเคราะห์ผลประเมินพนักงานและโครงการ HR มีประสบการณ์เชิงลึกด้านการพัฒนาองค์กร
+
+C - Context (บริบท): 
+เรากำลังวิเคราะห์ข้อมูลผลประเมินของโครงการ: "${pName}" โดยใช้สเกลคะแนน: ${sScale} เพื่อนำไปใช้ปรับปรุงกลยุทธ์บุคลากร ข้อมูลดิบอยู่ในไฟล์แนบ
+
+C - Constraint (ข้อจำกัด): 
+1. ใช้ดุลยพินิจและระบุสมมติฐานหากข้อมูลไม่ชัดเจน
+2. ห้ามสมมติตัวเลขที่ไม่มีในข้อมูลจริง
+3. ใช้ภาษาวิชาชีพ HR ที่เป็นทางการ
+4. จำกัดการวิเคราะห์ให้กระชับและตรงประเด็น
+5. หากข้อมูลไม่เพียงพอให้ระบุจุดที่ขาดหายไปทันที
+
+F - Format (รูปแบบเอาต์พุต): 
+นำเสนอผลลัพธ์ในรูปแบบ Markdown ดังนี้:
+- บทสรุปผู้บริหาร (Executive Summary)
+- ตารางวิเคราะห์สถิติเชิงปริมาณ (หัวข้อ, ค่าเฉลี่ย, ร้อยละ)
+- วิเคราะห์ความคิดเห็นเชิงคุณภาพ (จุดแข็ง/สิ่งที่ต้องพัฒนา/ข้อเสนอแนะ)
+- บทสรุปและข้อเสนอแนะเชิงกลยุทธ์ (3-5 ข้อที่ปฏิบัติได้จริง)
+
+[กรุณาวิเคราะห์ข้อมูลจากไฟล์ที่แนบมานี้]`;
+        };
+
+        const preview = document.getElementById('promptPreview');
+        const copyBtn = document.getElementById('copyBtn');
+        const copyBtnText = document.getElementById('copyBtnText');
+
+        preview.textContent = getPromptText();
+
+        document.getElementById('generateBtn').addEventListener('click', () => {
+            preview.textContent = getPromptText();
+        });
+
+        copyBtn.addEventListener('click', () => {
+            const text = getPromptText();
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                // Change button state
+                copyBtnText.textContent = "Copy แล้ว!";
+                copyBtn.classList.add('bg-green-600');
+                
+                setTimeout(() => {
+                    copyBtnText.textContent = "คัดลอก Prompt";
+                    copyBtn.classList.remove('bg-green-600');
+                }, 2000);
+            } catch (err) {
+                console.error("Copy failed", err);
+            }
+            document.body.removeChild(textArea);
+        });
+    </script>
+</body>
+</html>
