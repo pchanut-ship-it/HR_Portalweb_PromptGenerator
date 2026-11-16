@@ -1,125 +1,379 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR Prompt Generator Portal</title>
+    <title>AI HR Prompt Generator | ศูนย์รวมเครื่องมือ AI สำหรับงาน HR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script>
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem('hr-portal-theme');
+                if (savedTheme === 'dark' || savedTheme === 'light') {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) {
+                // Ignore storage access issues
+            }
+        })();
+    </script>
 </head>
 <body>
-    <div class="background-shapes">
+    <div class="background-shapes" aria-hidden="true">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
         <div class="shape shape-3"></div>
+        <div class="bg-grid"></div>
     </div>
 
-    <main class="container">
-        <header class="header">
-            <h1 class="animate-fade-in-up">AI HR <span class="text-gradient">Prompt Generator</span></h1>
-            <p class="subtitle animate-fade-in-up delay-1">ศูนย์รวมเครื่องมือ AI สำหรับการจัดการทรัพยากรบุคคลยุคใหม่</p>
-        </header>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a href="#top" class="brand" aria-label="AI HR Prompt Generator Home">
+                <span class="brand-logo">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </span>
+                <span class="brand-name">AI HR <span class="brand-accent">Prompt Generator</span></span>
+            </a>
 
-        <div class="portal-grid">
+            <div class="topbar-actions">
+                <span class="tool-count-pill" id="toolCountPill">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span id="visibleCount">7</span> เครื่องมือ
+                </span>
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="สลับโหมดสีหน้าจอ" title="สลับโหมดสว่าง / มืด">
+                    <i class="fa-solid fa-moon theme-icon-moon" aria-hidden="true"></i>
+                    <i class="fa-solid fa-sun theme-icon-sun" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" id="top">
+        <section class="header animate-fade-in-up">
+            <span class="hero-badge">
+                <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                AI-Powered HR Workspace
+            </span>
+            <h1>AI HR <span class="text-gradient">Prompt Generator</span></h1>
+            <p class="subtitle">ศูนย์รวมเครื่องมือสร้าง Prompt อัจฉริยะสำหรับการบริหารและพัฒนาทรัพยากรบุคคลยุคใหม่</p>
+        </section>
+
+        <section class="toolbar animate-fade-in-up delay-1" aria-label="ค้นหาและกรองเครื่องมือ">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                <input
+                    type="search"
+                    id="searchInput"
+                    class="search-input"
+                    placeholder="ค้นหาเครื่องมือ เช่น โครงการ, โปสเตอร์, Motion Graphic..."
+                    aria-label="ค้นหาเครื่องมือ AI HR"
+                    autocomplete="off"
+                >
+                <button type="button" id="clearSearch" class="clear-search" aria-label="ล้างคำค้นหา" hidden>
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="filter-group" role="tablist" aria-label="หมวดหมู่เครื่องมือ">
+                <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">ทั้งหมด</button>
+                <button type="button" class="filter-btn" data-filter="document" role="tab" aria-selected="false">เอกสาร &amp; โครงการ</button>
+                <button type="button" class="filter-btn" data-filter="creative" role="tab" aria-selected="false">สื่อ &amp; ครีเอทีฟ</button>
+                <button type="button" class="filter-btn" data-filter="analytics" role="tab" aria-selected="false">วิเคราะห์ &amp; บริหารงาน</button>
+            </div>
+        </section>
+
+        <section class="portal-grid" id="portalGrid" aria-label="รายการเครื่องมือ AI HR Prompt Generator">
             <!-- 1. เขียนโครงการ -->
-            <a href="Project Proposal/index.html" target="_blank" class="card animate-fade-in-up delay-2">
-                <div class="card-icon">
-                    <i class="fa-solid fa-file-signature"></i>
+            <a href="Project Proposal/index.html" target="_blank" rel="noopener noreferrer" class="card card--indigo animate-fade-in-up delay-2" data-category="document">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-file-signature" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">เอกสาร &amp; โครงการ</span>
+                    </div>
                 </div>
                 <div class="card-content">
                     <h2>เขียนโครงการ</h2>
                     <p>สร้างโครงร่างและข้อเสนอโครงการแบบมืออาชีพได้อย่างรวดเร็ว</p>
                 </div>
-                <div class="card-arrow">
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-footer">
+                    <span class="card-cta">เปิดใช้งานเครื่องมือ</span>
+                    <span class="card-arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </span>
                 </div>
             </a>
 
             <!-- 2. วิเคราะห์ผลประเมิน -->
-            <a href="Project Evaluation/index.html" target="_blank" class="card animate-fade-in-up delay-3">
-                <div class="card-icon" style="background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%); color: #D81B60;">
-                    <i class="fa-solid fa-chart-pie"></i>
+            <a href="Project Evaluation/index.html" target="_blank" rel="noopener noreferrer" class="card card--rose animate-fade-in-up delay-3" data-category="analytics">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">วิเคราะห์ &amp; ประเมินผล</span>
+                    </div>
                 </div>
                 <div class="card-content">
                     <h2>วิเคราะห์ผลประเมิน</h2>
                     <p>สรุปและวิเคราะห์ข้อมูลผลการประเมินโครงการหรือพนักงาน</p>
                 </div>
-                <div class="card-arrow">
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-footer">
+                    <span class="card-cta">เปิดใช้งานเครื่องมือ</span>
+                    <span class="card-arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </span>
                 </div>
             </a>
 
             <!-- 3. ร่างหนังสือราชการ -->
-            <a href="Official Correspondance/index.html" target="_blank" class="card animate-fade-in-up delay-4">
-                <div class="card-icon" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); color: #6a1b9a;">
-                    <i class="fa-solid fa-building-columns"></i>
+            <a href="Official Correspondance/index.html" target="_blank" rel="noopener noreferrer" class="card card--purple animate-fade-in-up delay-4" data-category="document">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">งานสารบรรณ</span>
+                    </div>
                 </div>
                 <div class="card-content">
                     <h2>ร่างหนังสือราชการ</h2>
                     <p>สร้างแบบร่างหนังสือราชการและเอกสารทางการที่ถูกต้องตามระเบียบ</p>
                 </div>
-                <div class="card-arrow">
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-footer">
+                    <span class="card-cta">เปิดใช้งานเครื่องมือ</span>
+                    <span class="card-arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </span>
                 </div>
             </a>
 
             <!-- 4. สร้างโปสเตอร์ประชาสัมพันธ์ -->
-            <a href="Poster Infographic/index.html" target="_blank" class="card animate-fade-in-up delay-5">
-                <div class="card-icon" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); color: #00897b;">
-                    <i class="fa-solid fa-palette"></i>
+            <a href="Poster Infographic/index.html" target="_blank" rel="noopener noreferrer" class="card card--teal animate-fade-in-up delay-5" data-category="creative">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-palette" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">สื่อ &amp; กราฟิก</span>
+                    </div>
                 </div>
                 <div class="card-content">
                     <h2>สร้างโปสเตอร์ประชาสัมพันธ์</h2>
                     <p>ออกแบบข้อความและไอเดียสำหรับทำโปสเตอร์อินโฟกราฟิกที่น่าสนใจ</p>
                 </div>
-                <div class="card-arrow">
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-footer">
+                    <span class="card-cta">เปิดใช้งานเครื่องมือ</span>
+                    <span class="card-arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </span>
                 </div>
             </a>
 
             <!-- 5. ช่วยจัดการงานรับสมัคร -->
-            <a href="Recruitment Job/index.html" target="_blank" class="card animate-fade-in-up delay-6">
-                <div class="card-icon" style="background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%); color: #e65100;">
-                    <i class="fa-solid fa-users-gear"></i>
+            <a href="Recruitment Job/index.html" target="_blank" rel="noopener noreferrer" class="card card--amber animate-fade-in-up delay-6" data-category="analytics">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-users-gear" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">สรรหาบุคลากร</span>
+                    </div>
                 </div>
                 <div class="card-content">
                     <h2>ช่วยจัดการงานรับสมัคร</h2>
                     <p>ร่างประกาศรับสมัครงาน คำถามสัมภาษณ์ และคัดกรองคุณสมบัติผู้สมัคร</p>
                 </div>
-                <div class="card-arrow">
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-footer">
+                    <span class="card-cta">เปิดใช้งานเครื่องมือ</span>
+                    <span class="card-arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </span>
                 </div>
             </a>
 
             <!-- 6. สร้าง Dashboard -->
-            <a href="RDashboard/index.html" target="_blank" class="card animate-fade-in-up delay-7">
-                <div class="card-icon" style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); color: #4527a0;">
-                    <i class="fa-solid fa-chart-line"></i>
+            <a href="RDashboard/index.html" target="_blank" rel="noopener noreferrer" class="card card--blue animate-fade-in-up delay-7" data-category="analytics">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">Data &amp; Analytics</span>
+                    </div>
                 </div>
                 <div class="card-content">
                     <h2>สร้าง Dashboard</h2>
                     <p>ออกแบบโครงสร้างตัวชี้วัดและหน้ากระดานสรุปข้อมูล HR</p>
                 </div>
-                <div class="card-arrow">
-                    <i class="fa-solid fa-arrow-right"></i>
+                <div class="card-footer">
+                    <span class="card-cta">เปิดใช้งานเครื่องมือ</span>
+                    <span class="card-arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </span>
                 </div>
             </a>
+
+            <!-- 7. สร้าง Motion Graphic -->
+            <a href="https://pchanut-ship-it.github.io/Prompt_Generator_for_Education/motion_prompt_studio.html" target="_blank" rel="noopener noreferrer" class="card card--fuchsia card--featured animate-fade-in-up delay-8" data-category="creative">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-clapperboard" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">สื่อ &amp; ครีเอทีฟ</span>
+                        <span class="badge-new">NEW</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2>สร้าง Motion Graphic</h2>
+                    <p>ออกแบบสคริปต์และสร้าง Prompt สำหรับผลิตวิดีโอ Motion Graphic และสื่อเคลื่อนไหวอย่างมืออาชีพ</p>
+                </div>
+                <div class="card-footer">
+                    <span class="card-cta">เปิดใช้งานเครื่องมือ</span>
+                    <span class="card-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </a>
+        </section>
+
+        <div class="empty-state" id="emptyState" hidden>
+            <div class="empty-state-icon">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            </div>
+            <h3>ไม่พบเครื่องมือที่ตรงกับการค้นหา</h3>
+            <p>ลองใช้คำค้นหาอื่น หรือล้างตัวกรองเพื่อดูเครื่องมือทั้งหมด</p>
+            <button type="button" class="reset-btn" id="resetFilters">
+                <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                แสดงเครื่องมือทั้งหมด
+            </button>
         </div>
-        
+
         <footer class="footer animate-fade-in-up delay-8">
-            <p>&copy; 2026 AI HR Workshop | Web Prompt Generator Portal</p>
+            <p>&copy; 2026 AI HR Prompt Generator | Empowering Modern Human Resources with AI</p>
         </footer>
     </main>
 
     <script>
-        // Optional JS for some interaction, hover effects are mostly CSS
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-8px) scale(1.02)';
+        document.addEventListener('DOMContentLoaded', () => {
+            const root = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+            const searchInput = document.getElementById('searchInput');
+            const clearSearch = document.getElementById('clearSearch');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portalGrid = document.getElementById('portalGrid');
+            const cards = Array.from(document.querySelectorAll('.portal-grid .card'));
+            const emptyState = document.getElementById('emptyState');
+            const resetFiltersBtn = document.getElementById('resetFilters');
+            const visibleCountEl = document.getElementById('visibleCount');
+
+            let activeFilter = 'all';
+
+            // Theme toggle logic
+            const updateThemeState = (theme) => {
+                root.setAttribute('data-theme', theme);
+                const isDark = theme === 'dark';
+                themeToggle.setAttribute('aria-pressed', String(isDark));
+                themeToggle.setAttribute('title', isDark ? 'เปลี่ยนเป็นโหมดสว่าง' : 'เปลี่ยนเป็นโหมดมืด');
+            };
+
+            updateThemeState(root.getAttribute('data-theme') || 'light');
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                updateThemeState(nextTheme);
+                try {
+                    localStorage.setItem('hr-portal-theme', nextTheme);
+                } catch (e) {
+                    // Ignore storage write error
+                }
             });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) scale(1)';
+
+            // Search & category filter logic
+            const applyFilters = () => {
+                const query = searchInput.value.trim().toLowerCase();
+                clearSearch.hidden = query.length === 0;
+
+                let visibleCount = 0;
+                const isFiltered = activeFilter !== 'all' || query.length > 0;
+                portalGrid.classList.toggle('is-filtered', isFiltered);
+
+                cards.forEach((card) => {
+                    const category = card.dataset.category || '';
+                    const title = card.querySelector('h2')?.textContent.toLowerCase() || '';
+                    const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+                    const badges = Array.from(card.querySelectorAll('.card-badge, .badge-new'))
+                        .map((el) => el.textContent.toLowerCase())
+                        .join(' ');
+
+                    const matchesCategory = activeFilter === 'all' || category === activeFilter;
+                    const matchesQuery =
+                        query === '' ||
+                        title.includes(query) ||
+                        description.includes(query) ||
+                        badges.includes(query);
+
+                    const isVisible = matchesCategory && matchesQuery;
+                    card.hidden = !isVisible;
+                    if (isVisible) {
+                        visibleCount += 1;
+                    }
+                });
+
+                visibleCountEl.textContent = String(visibleCount);
+                emptyState.hidden = visibleCount > 0;
+                portalGrid.hidden = visibleCount === 0;
+            };
+
+            filterButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    activeFilter = button.dataset.filter || 'all';
+                    filterButtons.forEach((btn) => {
+                        const isSelected = btn === button;
+                        btn.classList.toggle('active', isSelected);
+                        btn.setAttribute('aria-selected', String(isSelected));
+                    });
+                    applyFilters();
+                });
+            });
+
+            searchInput.addEventListener('input', applyFilters);
+
+            clearSearch.addEventListener('click', () => {
+                searchInput.value = '';
+                searchInput.focus();
+                applyFilters();
+            });
+
+            resetFiltersBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                activeFilter = 'all';
+                filterButtons.forEach((btn) => {
+                    const isAll = btn.dataset.filter === 'all';
+                    btn.classList.toggle('active', isAll);
+                    btn.setAttribute('aria-selected', String(isAll));
+                });
+                applyFilters();
+            });
+
+            // Subtle pointer glow effect on cards
+            cards.forEach((card) => {
+                card.addEventListener('pointermove', (event) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = event.clientX - rect.left;
+                    const y = event.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
             });
         });
     </script>
