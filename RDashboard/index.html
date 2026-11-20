@@ -29,13 +29,13 @@
         }
 
         .custom-radio input:checked + div {
-            border-color: #3b82f6;
+            border-color: #2563eb;
             background-color: #eff6ff;
         }
         
         .custom-radio input:checked + div .icon-box {
-            background-color: #3b82f6;
-            color: white;
+            background-color: #2563eb;
+            color: #ffffff;
         }
         
         /* Smooth transitions */
@@ -94,7 +94,7 @@
                         <!-- Real-time Option -->
                         <label class="custom-radio cursor-pointer relative">
                             <input type="radio" name="dashboardType" value="realtime" class="peer sr-only" checked onchange="updateForm()">
-                            <div class="rounded-xl border-2 border-slate-200 p-4 hover:bg-slate-50 transition-all-fast h-full flex flex-col items-start gap-3">
+                            <div class="radio-card-box rounded-xl border-2 border-slate-200 p-4 hover:bg-slate-50 transition-all-fast h-full flex flex-col items-start gap-3">
                                 <div class="icon-box bg-slate-100 text-slate-500 p-3 rounded-lg transition-all-fast">
                                     <i class="fa-solid fa-bolt text-xl"></i>
                                 </div>
@@ -108,7 +108,7 @@
                         <!-- Non Real-time Option -->
                         <label class="custom-radio cursor-pointer relative">
                             <input type="radio" name="dashboardType" value="static" class="peer sr-only" onchange="updateForm()">
-                            <div class="rounded-xl border-2 border-slate-200 p-4 hover:bg-slate-50 transition-all-fast h-full flex flex-col items-start gap-3">
+                            <div class="radio-card-box rounded-xl border-2 border-slate-200 p-4 hover:bg-slate-50 transition-all-fast h-full flex flex-col items-start gap-3">
                                 <div class="icon-box bg-slate-100 text-slate-500 p-3 rounded-lg transition-all-fast">
                                     <i class="fa-solid fa-chart-pie text-xl"></i>
                                 </div>
@@ -297,6 +297,25 @@
         // Update form elements when switching Dashboard Type
         function updateForm() {
             const type = document.querySelector('input[name="dashboardType"]:checked').value;
+            document.querySelectorAll('.custom-radio').forEach((label) => {
+                const input = label.querySelector('input[type="radio"]');
+                const box = label.querySelector('.radio-card-box');
+                const iconBox = label.querySelector('.icon-box');
+                const isChecked = Boolean(input && input.checked);
+                if (box) {
+                    box.classList.toggle('border-blue-600', isChecked);
+                    box.classList.toggle('bg-blue-50', isChecked);
+                    box.classList.toggle('border-slate-200', !isChecked);
+                    box.classList.toggle('bg-white', !isChecked);
+                    box.classList.toggle('hover:bg-slate-50', !isChecked);
+                }
+                if (iconBox) {
+                    iconBox.classList.toggle('bg-blue-600', isChecked);
+                    iconBox.classList.toggle('text-white', isChecked);
+                    iconBox.classList.toggle('bg-slate-100', !isChecked);
+                    iconBox.classList.toggle('text-slate-500', !isChecked);
+                }
+            });
             const container = document.getElementById('elementsContainer');
             // Toggle Data Source UI
             const gsheetContainer = document.getElementById('gsheetInputContainer');

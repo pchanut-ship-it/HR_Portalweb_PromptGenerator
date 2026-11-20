@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลัง HR AI Skills ประเทศไทย | Thailand HR Skills Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        (function () {
+            try {
+                const savedTheme = localStorage.getItem('hr-portal-theme');
+                if (savedTheme === 'dark' || savedTheme === 'light') {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) {
+                // Ignore storage access issues
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="background-shapes" aria-hidden="true">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- Top Utility Bar -->
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="topbar-left">
+                <a href="../index.html" class="back-link" aria-label="กลับหน้าหลักพอร์ทัล AI HR">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    <span>หน้าหลักพอร์ทัล</span>
+                </a>
+                <a href="#top" class="brand" aria-label="คลัง HR AI Skills ประเทศไทย">
+                    <span class="brand-logo" aria-hidden="true">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </span>
+                    <span>คลัง HR <span class="brand-accent">AI Skills</span> <span class="brand-text-sub">ประเทศไทย</span></span>
+                </a>
+            </div>
+
+            <div class="topbar-actions">
+                <button type="button" class="nav-pill-btn" id="openGuideTopBtn">
+                    <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+                    <span class="btn-label-hide-sm">วิธีใช้งาน</span>
+                </button>
+                <button type="button" class="nav-pill-btn nav-pill-btn--basket" id="selectedTopBtn" title="ดาวน์โหลดชุด Skills ที่เลือกไว้">
+                    <i class="fa-solid fa-basket-shopping" aria-hidden="true"></i>
+                    <span class="btn-label-hide-sm">ชุดที่เลือก</span>
+                    <span id="selectedCountTop">0</span>
+                </button>
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="สลับโหมดสีหน้าจอ" title="สลับโหมดสว่าง / มืด">
+                    <i class="fa-solid fa-moon theme-icon-moon" aria-hidden="true"></i>
+                    <i class="fa-solid fa-sun theme-icon-sun" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" id="top">
+        <!-- Hero Section -->
+        <section class="hero">
+            <span class="hero-badge">
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                Thailand HR Skills Repository • อัปเดตกฎหมายแรงงาน 2568–2569 &amp; PDPA
+            </span>
+            <h1>คลังทักษะ AI สำหรับ<span class="text-gradient">คนทำงาน HR ไทย</span></h1>
+            <p class="hero-subtitle">
+                รวมชุด Agent Skills ภาษาไทยมาตรฐาน <code>SKILL.md</code> ครบทั้ง 7 สายงาน HR ตั้งแต่สรรหา กฎหมายแรงงานฉบับที่ 9 พ.ศ. 2568 ประกันสังคมเพดาน 17,500 บาท ปี 2569 พัฒนาบุคลากร จนถึง People Analytics — พร้อมพรีวิว คัดลอก และดาวน์โหลดเป็นไฟล์ <code>.md</code> หรือแพ็กเกจ <code>.zip</code> ไปใช้งานกับ AI ได้ทันที
+            </p>
+
+            <div class="hero-stats" aria-label="ภาพรวมคลัง HR Skills">
+                <div class="stat-pill">
+                    <i class="fa-solid fa-cubes" aria-hidden="true"></i>
+                    <span><strong>18</strong> HR AI Skills พร้อมใช้</span>
+                </div>
+                <div class="stat-pill">
+                    <i class="fa-solid fa-sitemap" aria-hidden="true"></i>
+                    <span>ครอบคลุม <strong>7 สายงานหลัก</strong> HR ไทย</span>
+                </div>
+                <div class="stat-pill stat-pill--law">
+                    <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+                    <span>อัปเดต <strong>พ.ร.บ.คุ้มครองแรงงาน ฉ.9 &amp; สปส. 2569</strong></span>
+                </div>
+            </div>
+
+            <div class="hero-cta-row">
+                <button type="button" class="btn btn-primary" id="downloadAllHeroBtn">
+                    <i class="fa-solid fa-file-zipper" aria-hidden="true"></i>
+                    <span>ดาวน์โหลดทั้งหมด 18 Skills (.zip)</span>
+                </button>
+                <button type="button" class="btn btn-secondary" id="openGuideHeroBtn">
+                    <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+                    <span>วิธีนำ Skill ไปใช้งานกับ AI</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Search & Filters -->
+        <section class="filter-panel" aria-label="ค้นหาและกรอง HR Skills">
+            <div class="search-row">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="ค้นหา Skill หรือกฎหมาย เช่น ลาคลอด 120 วัน, ประกันสังคม, PDPA, KPI, JD, หนังสือตักเตือน... (กด / เพื่อค้นหา)"
+                        aria-label="ค้นหา HR AI Skills"
+                        autocomplete="off"
+                    >
+                    <button type="button" id="clearSearchBtn" class="clear-search" aria-label="ล้างคำค้นหา" hidden>
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <button type="button" class="law-toggle-btn" id="lawUpdateToggle" aria-pressed="false">
+                    <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+                    <span>เฉพาะอัปเดตกฎหมาย 2568–2569</span>
+                </button>
+            </div>
+
+            <div class="category-pills" id="categoryFilters" role="group" aria-label="กรองตามสายงาน HR"></div>
+
+            <div class="subfilter-row">
+                <div class="role-filter-group" id="roleFilterGroup" role="group" aria-label="กรองตามบทบาท HR">
+                    <span class="role-label">บทบาท:</span>
+                    <button type="button" class="role-btn active" data-role="all" aria-pressed="true">ทุกบทบาท</button>
+                    <button type="button" class="role-btn" data-role="generalist" aria-pressed="false">HR Generalist</button>
+                    <button type="button" class="role-btn" data-role="specialist" aria-pressed="false">HR Specialist</button>
+                    <button type="button" class="role-btn" data-role="manager" aria-pressed="false">HRBP &amp; Manager</button>
+                </div>
+
+                <div class="results-bar">
+                    <span id="resultCounter">แสดง 18 จาก 18 Skills</span>
+                    <button type="button" class="text-action-btn" id="selectAllVisibleBtn">
+                        <i class="fa-solid fa-check-double" aria-hidden="true"></i>
+                        <span>เลือกทั้งหมดที่แสดง</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Grid -->
+        <section class="skills-grid" id="skillsGrid" aria-label="รายการ HR AI Skills"></section>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" hidden>
+            <div class="empty-state-icon" aria-hidden="true">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3>ไม่พบ HR Skill ที่ตรงกับเงื่อนไข</h3>
+            <p>ลองใช้คำค้นหาอื่น เช่น กฎหมายแรงงาน, Payroll, TNA, KPI หรือล้างตัวกรองเพื่อดู Skills ทั้งหมด</p>
+            <button type="button" class="btn btn-primary" id="resetFiltersBtn">
+                <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+                <span>แสดง HR Skills ทั้งหมด</span>
+            </button>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 คลัง HR AI Skills ประเทศไทย | พัฒนาสำหรับงานบริหารและพัฒนาทรัพยากรบุคคลยุคใหม่ (HR Portal Thailand)</p>
+        </footer>
+    </main>
+
+    <!-- Floating Multi-Select Bundle Dock -->
+    <aside class="bundle-dock" id="bundleDock" aria-label="จัดการชุดดาวน์โหลดที่เลือก" hidden>
+        <div class="bundle-dock-info">
+            <span class="bundle-dock-badge" aria-hidden="true">
+                <i class="fa-solid fa-layer-group"></i>
+            </span>
+            <span id="bundleDockCount">เลือกไว้ 0 Skills</span>
+        </div>
+        <div class="bundle-dock-actions">
+            <button type="button" class="btn btn-secondary btn-sm" id="bundleSelectVisibleBtn">เลือกทั้งหมดที่แสดง</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="bundleClearBtn">ล้างรายการ</button>
+            <button type="button" class="btn btn-primary btn-sm" id="bundleDownloadBtn">
+                <i class="fa-solid fa-file-zipper" aria-hidden="true"></i>
+                <span>ดาวน์โหลดชุดที่เลือก (.zip)</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Skill Detail Modal -->
+    <div class="modal-overlay" id="skillModal" role="dialog" aria-modal="true" aria-labelledby="modalSkillTitle" hidden>
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div>
+                    <div class="modal-badges">
+                        <span class="skill-cat-pill" id="modalCategoryBadge">หมวดหมู่</span>
+                        <span class="law-update-badge" id="modalLawBadge" hidden>
+                            <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+                            อัปเดตกฎหมาย 2568–2569
+                        </span>
+                    </div>
+                    <h2 class="modal-title" id="modalSkillTitle">ชื่อ Skill</h2>
+                    <div class="modal-subtitle" id="modalSkillSubtitle">Subtitle</div>
+                </div>
+                <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="ปิดหน้าต่างรายละเอียด">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="modal-action-bar">
+                <div class="modal-action-buttons">
+                    <button type="button" class="btn btn-primary btn-sm" id="modalDownloadZipBtn">
+                        <i class="fa-solid fa-file-zipper" aria-hidden="true"></i>
+                        <span>ดาวน์โหลดแพ็กเกจ .zip</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="modalDownloadMdBtn">
+                        <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+                        <span>ดาวน์โหลด .md</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="modalCopyMdBtn">
+                        <i class="fa-regular fa-copy" aria-hidden="true"></i>
+                        <span>คัดลอก SKILL.md</span>
+                    </button>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm" id="modalSelectToggleBtn">
+                    <i class="fa-regular fa-square" aria-hidden="true"></i>
+                    <span>เพิ่มเข้าชุดดาวน์โหลด</span>
+                </button>
+            </div>
+
+            <div class="modal-tabs" id="modalTabs" role="tablist" aria-label="มุมมองรายละเอียด Skill">
+                <button type="button" class="modal-tab-btn active" data-tab="overview" role="tab" aria-selected="true">ภาพรวม &amp; ตัวอย่างคำสั่ง</button>
+                <button type="button" class="modal-tab-btn" data-tab="preview" role="tab" aria-selected="false">พรีวิวเนื้อหา Skill</button>
+                <button type="button" class="modal-tab-btn" data-tab="raw" role="tab" aria-selected="false">ไฟล์ต้นฉบับ SKILL.md</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Tab 1: Overview & Example Prompts -->
+                <div id="tabPanelOverview" role="tabpanel">
+                    <div class="modal-summary-box" id="modalSummaryText"></div>
+                    <div class="modal-meta-grid" id="modalMetaGrid"></div>
+
+                    <div class="modal-meta-grid">
+                        <div class="meta-item">
+                            <div class="meta-item-label">ผลลัพธ์มาตรฐานที่จะได้รับ</div>
+                            <div class="meta-chips" id="modalOutputsList"></div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-item-label">กฎหมาย / กรอบอ้างอิงที่เกี่ยวข้อง</div>
+                            <div class="meta-chips" id="modalLawsList"></div>
+                        </div>
+                    </div>
+
+                    <h3 class="prompt-section-title">
+                        <i class="fa-solid fa-terminal" aria-hidden="true"></i>
+                        <span>ตัวอย่างคำสั่งใช้งานจริง (คลิกคัดลอกไปใช้ได้ทันที)</span>
+                    </h3>
+                    <div class="prompt-cards" id="modalPromptsList"></div>
+                </div>
+
+                <!-- Tab 2: Rendered Markdown Preview -->
+                <div id="tabPanelPreview" role="tabpanel" hidden>
+                    <div class="md-preview" id="modalMarkdownPreview"></div>
+                </div>
+
+                <!-- Tab 3: Raw SKILL.md -->
+                <div id="tabPanelRaw" role="tabpanel" hidden>
+                    <pre class="raw-code-block" id="modalRawCode"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How-to-Use Guide Modal -->
+    <div class="modal-overlay" id="guideModal" role="dialog" aria-modal="true" aria-labelledby="guideModalTitle" hidden>
+        <div class="modal-dialog modal-dialog--narrow">
+            <div class="modal-header">
+                <div>
+                    <h2 class="modal-title" id="guideModalTitle">วิธีนำ HR AI Skill ไปใช้งานกับเครื่องมือ AI</h2>
+                    <div class="modal-subtitle">รองรับมาตรฐาน Agent Skills (<code>SKILL.md</code>) และ Custom Instructions ทุกแพลตฟอร์ม</div>
+                </div>
+                <button type="button" class="modal-close-btn" id="guideCloseBtn" aria-label="ปิดหน้าต่างคู่มือ">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="modal-tabs" id="guideTabs" role="tablist" aria-label="เลือกแพลตฟอร์ม AI">
+                <button type="button" class="modal-tab-btn active" data-platform="antigravity" role="tab" aria-selected="true">Antigravity</button>
+                <button type="button" class="modal-tab-btn" data-platform="claude" role="tab" aria-selected="false">Claude / Claude Code</button>
+                <button type="button" class="modal-tab-btn" data-platform="chatgpt" role="tab" aria-selected="false">ChatGPT Skills</button>
+                <button type="button" class="modal-tab-btn" data-platform="gemini" role="tab" aria-selected="false">Gemini Skills</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="pdpa-warning-banner">
+                    <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                    <div>
+                        <strong>ข้อปฏิบัติสำคัญด้าน PDPA ก่อนใช้งาน AI:</strong> ห้ามนำชื่อ-นามสกุลจริง เลขบัตรประชาชน 13 หลัก เบอร์โทรศัพท์ เลขบัญชีเงินเดือน หรือใบรับรองแพทย์ของพนักงานจริงส่งเข้าสู่ AI สาธารณะ ให้ใช้นามสมมติหรือรหัสพนักงานแทนทุกครั้ง
+                    </div>
+                </div>
+                <div id="guidePlatformContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="skills-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

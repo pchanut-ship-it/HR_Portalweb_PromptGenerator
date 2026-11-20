@@ -44,7 +44,7 @@
             <div class="topbar-actions">
                 <span class="tool-count-pill" id="toolCountPill">
                     <i class="fa-solid fa-layer-group"></i>
-                    <span id="visibleCount">7</span> เครื่องมือ
+                    <span id="visibleCount">8</span> เครื่องมือ
                 </span>
                 <button type="button" class="theme-toggle" id="themeToggle" aria-label="สลับโหมดสีหน้าจอ" title="สลับโหมดสว่าง / มืด">
                     <i class="fa-solid fa-moon theme-icon-moon" aria-hidden="true"></i>
@@ -71,7 +71,7 @@
                     type="search"
                     id="searchInput"
                     class="search-input"
-                    placeholder="ค้นหาเครื่องมือ เช่น โครงการ, โปสเตอร์, Motion Graphic..."
+                    placeholder="ค้นหาเครื่องมือ เช่น โครงการ, โปสเตอร์, Motion Graphic, HR Skills..."
                     aria-label="ค้นหาเครื่องมือ AI HR"
                     autocomplete="off"
                 >
@@ -85,6 +85,7 @@
                 <button type="button" class="filter-btn" data-filter="document" role="tab" aria-selected="false">เอกสาร &amp; โครงการ</button>
                 <button type="button" class="filter-btn" data-filter="creative" role="tab" aria-selected="false">สื่อ &amp; ครีเอทีฟ</button>
                 <button type="button" class="filter-btn" data-filter="analytics" role="tab" aria-selected="false">วิเคราะห์ &amp; บริหารงาน</button>
+                <button type="button" class="filter-btn" data-filter="skills" role="tab" aria-selected="false">คลัง HR Skills</button>
             </div>
         </section>
 
@@ -243,6 +244,29 @@
                     </span>
                 </div>
             </a>
+
+            <!-- 8. คลัง HR AI Skills ประเทศไทย -->
+            <a href="HR Skills Library/index.html" class="card card--emerald card--featured animate-fade-in-up delay-8" data-category="skills" data-keywords="HR Skills คลัง HR Skills SKILL.md zip ภาษาไทย กฎหมายแรงงาน ประกันสังคม PDPA">
+                <div class="card-top">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">คลัง AI Skills</span>
+                        <span class="badge-new">NEW</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2>คลัง HR AI Skills ประเทศไทย</h2>
+                    <p>รวม 18 Agent Skills ภาษาไทยพร้อมดาวน์โหลด (.zip / .md) ครอบคลุม 7 สายงาน HR ไทย อัปเดตกฎหมายแรงงาน พ.ศ. 2568–2569 ประกันสังคม 17,500 บาท และ PDPA</p>
+                </div>
+                <div class="card-footer">
+                    <span class="card-cta">เปิดคลังและดาวน์โหลด Skills</span>
+                    <span class="card-arrow">
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </a>
         </section>
 
         <div class="empty-state" id="emptyState" hidden>
@@ -309,18 +333,19 @@
 
                 cards.forEach((card) => {
                     const category = card.dataset.category || '';
+                    const keywords = (card.dataset.keywords || '').toLowerCase();
                     const title = card.querySelector('h2')?.textContent.toLowerCase() || '';
                     const description = card.querySelector('p')?.textContent.toLowerCase() || '';
                     const badges = Array.from(card.querySelectorAll('.card-badge, .badge-new'))
                         .map((el) => el.textContent.toLowerCase())
                         .join(' ');
+                    const searchableText = `${title} ${description} ${badges} ${keywords}`;
+                    const queryTokens = query ? query.split(/\s+/).filter(Boolean) : [];
 
                     const matchesCategory = activeFilter === 'all' || category === activeFilter;
                     const matchesQuery =
-                        query === '' ||
-                        title.includes(query) ||
-                        description.includes(query) ||
-                        badges.includes(query);
+                        queryTokens.length === 0 ||
+                        queryTokens.every((token) => searchableText.includes(token));
 
                     const isVisible = matchesCategory && matchesQuery;
                     card.hidden = !isVisible;

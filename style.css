@@ -636,7 +636,7 @@ body {
     transform: translateX(4px);
 }
 
-/* Featured 7th Card (Motion Graphic) spans the bottom row cleanly when unfiltered */
+/* Featured Card spans the full row cleanly when unfiltered */
 .portal-grid:not(.is-filtered) .card--featured {
     grid-column: 1 / -1;
     display: grid;
@@ -648,7 +648,7 @@ body {
     background: linear-gradient(
         135deg,
         var(--surface) 0%,
-        rgba(217, 70, 239, 0.08) 55%,
+        var(--card-accent-soft) 55%,
         rgba(79, 70, 229, 0.08) 100%
     );
 }
@@ -682,7 +682,7 @@ body {
     border-radius: var(--radius-pill);
     background: var(--card-icon-bg);
     color: #FFFFFF;
-    box-shadow: 0 8px 20px rgba(217, 70, 239, 0.28);
+    box-shadow: 0 8px 20px var(--card-accent-soft);
 }
 
 .portal-grid:not(.is-filtered) .card--featured:hover .card-cta {
@@ -765,6 +765,17 @@ body {
 
 [data-theme="dark"] .card--fuchsia {
     --card-accent: #F0ABFC;
+}
+
+.card--emerald {
+    --card-accent: #059669;
+    --card-accent-soft: rgba(5, 150, 105, 0.13);
+    --card-accent-border: rgba(5, 150, 105, 0.44);
+    --card-icon-bg: linear-gradient(135deg, #10B981 0%, #0D9488 100%);
+}
+
+[data-theme="dark"] .card--emerald {
+    --card-accent: #34D399;
 }
 
 /* Empty State */

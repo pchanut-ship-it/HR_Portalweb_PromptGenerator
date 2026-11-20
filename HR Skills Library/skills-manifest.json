@@ -1,0 +1,407 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-11-20",
+  "title": "คลัง HR AI Skills ประเทศไทย",
+  "categories": [
+    {
+      "id": "recruitment",
+      "name": "สรรหาและคัดเลือก",
+      "shortName": "สรรหาบุคลากร",
+      "accent": "amber",
+      "icon": "fa-solid fa-user-plus",
+      "description": "ร่าง JD ประกาศรับสมัครงาน คัดกรองเรซูเม่ สัมภาษณ์ STAR และวางแผนปฐมนิเทศ 30-60-90 วัน"
+    },
+    {
+      "id": "labor-law",
+      "name": "กฎหมายแรงงาน & ER",
+      "shortName": "กฎหมาย & ER",
+      "accent": "rose",
+      "icon": "fa-solid fa-scale-balanced",
+      "description": "กฎหมายคุ้มครองแรงงานฉบับที่ 9 พ.ศ. 2568, กระบวนการทางวินัย หนังสือตักเตือน และ PDPA งานบุคคล"
+    },
+    {
+      "id": "comp-ben",
+      "name": "ค่าตอบแทน & Payroll",
+      "shortName": "ค่าตอบแทน & ภาษี",
+      "accent": "emerald",
+      "icon": "fa-solid fa-coins",
+      "description": "ตรวจ Payroll ประกันสังคม 2569 (เพดาน 17,500 บาท), ภ.ง.ด.1, กระบอกเงินเดือน และ Flexible Benefits"
+    },
+    {
+      "id": "hrd",
+      "name": "พัฒนาบุคลากร (HRD)",
+      "shortName": "พัฒนาบุคลากร",
+      "accent": "indigo",
+      "icon": "fa-solid fa-graduation-cap",
+      "description": "วิเคราะห์ TNA, พ.ร.บ.พัฒนาฝีมือแรงงาน 50%/ภาษี 200%, Competency, IDP และออกแบบ Workshop"
+    },
+    {
+      "id": "performance",
+      "name": "บริหารผลงาน & Talent",
+      "shortName": "ผลงาน & Talent",
+      "accent": "purple",
+      "icon": "fa-solid fa-award",
+      "description": "ตั้ง KPI/OKR, Calibration, แผน PIP, ประเมินศักยภาพ 9-Box Grid และ Succession Planning"
+    },
+    {
+      "id": "od-hrbp",
+      "name": "OD, ความผูกพัน & HRBP",
+      "shortName": "OD & HRBP",
+      "accent": "teal",
+      "icon": "fa-solid fa-sitemap",
+      "description": "Engagement Survey, eNPS, Exit/Stay Interview, RACI โครงสร้างองค์กร และ Change Management"
+    },
+    {
+      "id": "analytics-comms",
+      "name": "ข้อมูล HR & งานสื่อสาร",
+      "shortName": "Data & สารบรรณ",
+      "accent": "blue",
+      "icon": "fa-solid fa-chart-column",
+      "description": "People Analytics, HR Dashboard, ร่างประกาศนโยบาย หนังสือราชการ และจดหมายสื่อสาร HR"
+    }
+  ],
+  "skills": [
+    {
+      "slug": "hr-jd-job-posting-th",
+      "title": "ร่าง JD และประกาศรับสมัครงานมืออาชีพ",
+      "subtitle": "Job Description & Job Posting Strategist",
+      "category": "recruitment",
+      "summary": "วิเคราะห์งาน แยก Must-have vs Nice-to-have ตั้ง KPI ตำแหน่งงาน และเขียนประกาศรับสมัครที่ดึงดูดผู้สมัครพร้อมคำเตือน PDPA",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "พื้นฐาน–กลาง",
+      "laws": ["พ.ร.บ.คุ้มครองแรงงาน", "PDPA"],
+      "hasLawUpdate2568": false,
+      "outputs": ["JD มาตรฐาน", "ประกาศรับสมัครงาน", "KPI ทดลองงาน"],
+      "tags": ["JD", "Job Posting", "Recruitment", "สรรหา", "ประกาศรับสมัคร"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยร่าง JD และประกาศรับสมัครงานตำแหน่ง 'Senior Accounting Officer' สำหรับบริษัทนำเข้า-ส่งออกย่านบางนา ทำงาน จันทร์-ศุกร์ ต้องการคนปิดงบการเงินได้ ใช้โปรแกรม Express คล่อง งบเงินเดือน 38,000–45,000 บาท",
+        "ช่วยรีวิวและปรับประกาศรับสมัครงานตำแหน่ง HR Officer นี้ให้ดึงดูดคนรุ่นใหม่มากขึ้น โดยตัดเงื่อนไขที่ไม่จำเป็นออก และเพิ่มข้อความ PDPA ท้ายประกาศให้ถูกต้อง",
+        "ช่วยแปลง JD ตำแหน่งหัวหน้าคลังสินค้านี้ ให้มีตาราง KPI สำหรับประเมินช่วงทดลองงาน 119 วันด้วย"
+      ]
+    },
+    {
+      "slug": "hr-resume-screening-interview-th",
+      "title": "คัดกรองเรซูเม่และออกแบบสัมภาษณ์ STAR",
+      "subtitle": "Resume Screening & STAR Interview Designer",
+      "category": "recruitment",
+      "summary": "จัดอันดับผู้สมัครเทียบ JD ด้วยเกณฑ์ที่เป็นกลาง ออกแบบคำถามสัมภาษณ์เชิงพฤติกรรม STAR และ Interview Scorecard ลดอคติ",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "กลาง–สูง",
+      "laws": ["PDPA"],
+      "hasLawUpdate2568": false,
+      "outputs": ["Screening Matrix", "ชุดคำถาม STAR", "Scorecard 1–5"],
+      "tags": ["Resume", "Interview", "STAR", "Scorecard", "สัมภาษณ์งาน"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยออกแบบชุดคำถามสัมภาษณ์แบบ STAR และ Scorecard สำหรับตำแหน่ง 'เจ้าหน้าที่บุคคลทั่วไป (HR Generalist)' เน้นวัดความแม่นยำเรื่องกฎหมายแรงงาน การประสานงาน และการรับมือพนักงานร้องเรียน",
+        "นี่คือข้อมูลผู้สมัคร 3 คน (ตัดชื่อและเบอร์โทรออกแล้ว) เทียบกับ JD ตำแหน่ง Sales Supervisor ช่วยวิเคราะห์จุดแข็ง จุดที่ต้องถามเพิ่ม และจัดอันดับคนน่าเรียกสัมภาษณ์ให้หน่อย",
+        "ผู้สมัครมีช่องว่างการทำงาน 10 เดือน และเปลี่ยนงาน 3 ที่ใน 2 ปี ช่วยร่างคำถามสัมภาษณ์แบบสุภาพ ให้เกียรติ แต่ได้ข้อมูลข้อเท็จจริงครบถ้วน"
+      ]
+    },
+    {
+      "slug": "hr-onboarding-probation-th",
+      "title": "แผนปฐมนิเทศและประเมินทดลองงาน 30-60-90 วัน",
+      "subtitle": "Onboarding & Probation Specialist",
+      "category": "recruitment",
+      "summary": "ออกแบบ Onboarding Roadmap แผนงาน 30-60-90 วัน และไทม์ไลน์ประเมินทดลองงานที่ปลอดภัยตาม ม.17 และ ม.118 (เกณฑ์ 119 วัน)",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "กลาง",
+      "laws": ["พ.ร.บ.คุ้มครองแรงงาน ม.17/118", "ประกันสังคม"],
+      "hasLawUpdate2568": false,
+      "outputs": ["แผน 30-60-90 วัน", "แบบประเมินทดลองงาน", "Buddy Checklist"],
+      "tags": ["Onboarding", "Probation", "30-60-90", "ทดลองงาน", "119 วัน"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยออกแบบแผน Onboarding และแผน 30-60-90 วัน สำหรับพนักงานใหม่ตำแหน่ง 'Sale Executive (B2B)' ทดลองงาน 119 วัน เงินเดือนออกทุกสิ้นเดือน พร้อมไทม์ไลน์การประเมินที่ไม่เสี่ยงผิดกฎหมายแรงงาน",
+        "ช่วยสร้างแบบฟอร์มประเมินทดลองงาน (Probation Evaluation Form) แบบ 2 รอบ สำหรับพนักงานฝ่ายผลิต พร้อมเกณฑ์คะแนนและการแจ้งตักเตือนกรณีผลงานต่ำกว่าเกณฑ์ในรอบ 60 วัน",
+        "ช่วยร่างอีเมลต้อนรับพนักงานใหม่ก่อนวันเริ่มงาน 3 วัน และคู่มือสั้นๆ สำหรับพี่เลี้ยง (Buddy Checklist)"
+      ]
+    },
+    {
+      "slug": "hr-thai-labor-law-advisor",
+      "title": "ที่ปรึกษากฎหมายแรงงานไทยและข้อบังคับการทำงาน",
+      "subtitle": "Thai Labor Law & Compliance Advisor",
+      "category": "labor-law",
+      "summary": "อัปเดต พ.ร.บ.คุ้มครองแรงงาน (ฉบับที่ 9) พ.ศ. 2568 (ลาคลอด 120/60 วัน ลาช่วยคู่สมรส 15 วัน) ค่าชดเชย ม.118 ประกันสังคม 2569 และแบบ คร.11",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "สูง",
+      "laws": ["พ.ร.บ.คุ้มครองแรงงาน ฉ.9 (2568)", "ม.118/119", "ประกันสังคม 2569"],
+      "hasLawUpdate2568": true,
+      "outputs": ["สรุปความเห็น HR", "ตารางเทียบข้อบังคับ", "คำนวณค่าชดเชย"],
+      "tags": ["กฎหมายแรงงาน", "ลาคลอด 120 วัน", "ค่าชดเชย", "ข้อบังคับการทำงาน", "คร.11"],
+      "featured": true,
+      "examplePrompts": [
+        "พนักงานหญิงจะคลอดลูกเดือนหน้า ขอลาคลอด 120 วัน และสามีที่เป็นพนักงานบริษัทเดียวกันขอลาช่วยคู่สมรสคลอดบุตรด้วย HR ต้องจ่ายค่าจ้างกี่วัน กี่เปอร์เซ็นต์ และต้องแก้ข้อบังคับการทำงานอย่างไร",
+        "บริษัทมีพนักงาน 85 คน ต้องการเลิกจ้างพนักงานอายุงาน 4 ปี 2 เดือน เพราะปรับโครงสร้างหน่วยงาน เงินเดือน 35,000 บาท ค่าตำแหน่ง 5,000 บาท (จ่ายทุกวันที่ 25) ถ้าจะเลิกจ้างสิ้นเดือนนี้ต้องจ่ายอะไรบ้าง เป็นเงินเท่าไร",
+        "ช่วยตรวจเช็กร่างข้อบังคับเกี่ยวกับการทำงานหมวดวันลาและสวัสดิการของบริษัทให้สอดคล้องกับกฎหมายแรงงานไทย พ.ศ. 2568–2569"
+      ]
+    },
+    {
+      "slug": "hr-disciplinary-warning-th",
+      "title": "กระบวนการทางวินัยและการร่างหนังสือตักเตือน",
+      "subtitle": "Disciplinary Process & Warning Letter Specialist",
+      "category": "labor-law",
+      "summary": "วางแนวทางสอบสวนทางวินัยอย่างเป็นธรรม ร่างหนังสือตักเตือนที่มีผลบังคับ 1 ปีตาม ม.119 (4) และหนังสือเลิกจ้างที่รัดกุมตาม ม.17 วรรคท้าย",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "สูง",
+      "laws": ["พ.ร.บ.คุ้มครองแรงงาน ม.17/119", "PDPA"],
+      "hasLawUpdate2568": true,
+      "outputs": ["โครงร่างหนังสือตักเตือน", "ชุดคำถามสอบสวน", "เช็กลิสต์หลักฐาน"],
+      "tags": ["หนังสือตักเตือน", "Warning Letter", "วินัย", "มาตรา 119", "เลิกจ้าง"],
+      "featured": false,
+      "examplePrompts": [
+        "พนักงานฝ่ายขายมาทำงานสายเกิน 30 นาที รวม 6 ครั้งในเดือนเดียว และหัวหน้างานเคยตักเตือนทางไลน์แล้วแต่ยังไม่ปรับปรุง ช่วยแนะนำขั้นตอนทางวินัยและร่างหนังสือตักเตือนเป็นทางการให้หน่อย",
+        "พนักงานขาดงานติดต่อกัน 3 วันทำงานโดยไม่แจ้งลาและติดต่อไม่ได้ (มีวันอาทิตย์คั่นกลาง 1 วัน) นับเป็นละทิ้งหน้าที่ 3 วันทำงานติดต่อกันตาม ม.119 (5) หรือไม่ และต้องดำเนินการขั้นตอนใดก่อนออกหนังสือเลิกจ้าง",
+        "ช่วยตรวจสอบร่างหนังสือเลิกจ้างกรณีพนักงานจงใจปลอมใบเสร็จเบิกค่าเดินทาง ว่าระบุเหตุผลครบถ้วนตามกฎหมายและไม่เสียเปรียบหากขึ้นศาลแรงงานหรือไม่"
+      ]
+    },
+    {
+      "slug": "hr-pdpa-compliance-th",
+      "title": "การคุ้มครองข้อมูลส่วนบุคคลสำหรับงาน HR (PDPA)",
+      "subtitle": "HR PDPA Compliance Specialist",
+      "category": "labor-law",
+      "summary": "แยกฐานสัญญา/กฎหมาย vs ความยินยอม ร่าง Privacy Notice, Explicit Consent ข้อมูลอ่อนไหว ม.26 (Biometric/สุขภาพ), RoPA และ Data Retention",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "กลาง–สูง",
+      "laws": ["PDPA พ.ศ. 2562 (ม.24/ม.26)"],
+      "hasLawUpdate2568": true,
+      "outputs": ["Privacy Notice", "ตาราง RoPA", "นโยบายเก็บทำลายข้อมูล"],
+      "tags": ["PDPA", "Privacy Notice", "Consent", "RoPA", "ข้อมูลอ่อนไหว"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยร่าง Privacy Notice ฉบับภาษาไทยสำหรับผู้สมัครงาน เพื่อนำไปใส่ในแบบฟอร์มรับสมัครงานออนไลน์และท้ายประกาศรับสมัครงาน",
+        "บริษัทกำลังจะเปลี่ยนจากตอกบัตรเป็นเครื่องสแกนใบหน้า และให้ผู้สมัครงานยื่นผลตรวจประวัติอาชญากรรม HR ต้องเตรียมเอกสาร PDPA อะไรบ้างและมีข้อควรระวังอย่างไร",
+        "ช่วยสร้างตาราง RoPA (บันทึกรายการประมวลผลข้อมูล) และนโยบายระยะเวลาจัดเก็บทำลายเอกสาร (Retention Policy) สำหรับแผนก HR ทั้งฝ่ายสรรหาและฝ่ายเงินเดือน"
+      ]
+    },
+    {
+      "slug": "hr-payroll-sso-tax-audit-th",
+      "title": "ตรวจเช็กเงินเดือน ประกันสังคม 2569 และภาษี ภ.ง.ด.1",
+      "subtitle": "Thai Payroll, SSO & Tax Compliance Specialist",
+      "category": "comp-ben",
+      "summary": "คำนวณ OT 1.5x/3x ฐานประกันสังคม ม.33 เพดานใหม่ 17,500 บาท (875 บาท/เดือน) ภาษี ภ.ง.ด.1 เตรียมรับกองทุนสงเคราะห์ลูกจ้าง 2570 และปิดงวด Payroll",
+      "roles": ["generalist", "specialist"],
+      "level": "สูง",
+      "laws": ["ประกันสังคม 2569 (17,500 บาท)", "กองทุนสงเคราะห์ลูกจ้าง 2570", "ประมวลรัษฎากร"],
+      "hasLawUpdate2568": true,
+      "outputs": ["ตารางคำนวณ Payroll", "เช็กลิสต์ปิดงวด", "ประกาศสื่อสาร สปส."],
+      "tags": ["Payroll", "เงินเดือน", "ประกันสังคม 17500", "OT", "ภ.ง.ด.1", "กองทุนสงเคราะห์ลูกจ้าง"],
+      "featured": true,
+      "examplePrompts": [
+        "พนักงานเงินเดือน 24,000 บาท ค่าตำแหน่ง 3,000 บาท (จ่ายประจำทุกเดือน) ทำ OT วันทำงาน 10 ชม. และวันอาทิตย์ 4 ชม. มี PVD 3% ช่วยคำนวณฐานประกันสังคมปี 2569, OT และภาษี ภ.ง.ด.1 เบื้องต้น (โสด ไม่มีลดหย่อนเพิ่ม) ให้หน่อย",
+        "ช่วยร่างประกาศสื่อสารภายในบริษัทเรื่อง 'การปรับเพดานเงินสมทบประกันสังคมจาก 750 บาท เป็น 875 บาท ตั้งแต่ ม.ค. 2569' ให้พนักงานเข้าใจง่าย เห็นสิทธิประโยชน์ที่เพิ่มขึ้น และไม่สับสน",
+        "ช่วยจัดทำ Payroll Audit Checklist สำหรับรอบปิดบัญชีสิ้นเดือน เพื่อใช้ตรวจสอบก่อนโอนเงินเดือนพนักงาน 120 คน"
+      ]
+    },
+    {
+      "slug": "hr-salary-structure-grading-th",
+      "title": "ออกแบบโครงสร้างเงินเดือนและกระบอกเงินเดือน",
+      "subtitle": "Salary Structure & Job Grading Architect",
+      "category": "comp-ben",
+      "summary": "ประเมินค่างาน จัด Job Grade คำนวณ Min-Mid-Max, Range Spread, Compa-ratio แก้ปัญหาเงินเดือนคนใหม่แซงคนเก่า และออกแบบ Merit Matrix",
+      "roles": ["specialist", "manager"],
+      "level": "สูง",
+      "laws": ["ค่าจ้างขั้นต่ำ", "ม.53 ค่าจ้างเท่าเทียม"],
+      "hasLawUpdate2568": false,
+      "outputs": ["ตารางกระบอกเงินเดือน", "เกณฑ์ Job Grade", "Merit Matrix"],
+      "tags": ["Salary Structure", "Job Grading", "Compa-ratio", "กระบอกเงินเดือน", "ขึ้นเงินเดือน"],
+      "featured": false,
+      "examplePrompts": [
+        "บริษัททำธุรกิจโลจิสติกส์ พนักงาน 120 คน ต้องการออกแบบโครงสร้างเงินเดือน 6 ระดับ (ตั้งแต่พนักงานคลังถึงผู้จัดการฝ่าย) โดยจุดกึ่งกลาง Grade 3 อยู่ที่ประมาณ 28,000 บาท ช่วยคำนวณ Min-Mid-Max และอธิบายวิธีจัดคนลงกระบอกให้หน่อย",
+        "พบปัญหาหัวหน้างานเก่าเงินเดือน 38,000 บาท แต่น้องใหม่ที่เพิ่งรับเข้ามาเรียก 42,000 บาท HR ควรใช้หลักการ Salary Structure และแนวทางปรับแก้ปัญหานี้อย่างไรโดยไม่กระทบขวัญกำลังใจ",
+        "ช่วยออกแบบ Merit Increase Matrix สำหรับงบประมาณปรับขึ้นเงินเดือนทั้งบริษัทไม่เกิน 4.5% โดยเน้นผลักดันคนเก่งที่มี Compa-ratio ต่ำกว่าตลาด"
+      ]
+    },
+    {
+      "slug": "hr-benefits-wellbeing-design-th",
+      "title": "ออกแบบสวัสดิการยืดหยุ่นและสุขภาวะองค์กร",
+      "subtitle": "Flexible Benefits & Holistic Wellbeing Designer",
+      "category": "comp-ben",
+      "summary": "จัดแพ็กเกจ Core + Flexible Benefits ตอบโจทย์หลายช่วงวัย วางแผน Holistic Wellbeing (กาย-ใจ-การเงิน) พร้อมเช็กประเด็นภาษีสวัสดิการ",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "กลาง",
+      "laws": ["ประมวลรัษฎากร (ภาษีสวัสดิการ)", "กองทุน PVD"],
+      "hasLawUpdate2568": false,
+      "outputs": ["โครงสร้าง Flex Benefits", "ปฏิทิน Wellbeing", "แบบสำรวจสวัสดิการ"],
+      "tags": ["Flexible Benefits", "Wellbeing", "สวัสดิการ", "PVD", "สุขภาพจิต"],
+      "featured": false,
+      "examplePrompts": [
+        "บริษัทมีพนักงาน 90 คน (Gen Z 50%, Gen Y 40%, Gen X 10%) มีงบ Flexible Benefits คนละ 6,000 บาท/ปี ช่วยออกแบบหมวดสวัสดิการให้เลือก พร้อมกฎกติกาการเบิกและข้อควรระวังเรื่องภาษี",
+        "พนักงานในทีมเริ่มมีอาการ Burnout และลาออกเพราะความเครียด ช่วยออกแบบโครงการ Mental & Financial Wellbeing งบประหยัดที่ HR จัดทำเองได้ภายใน 6 เดือน",
+        "ช่วยร่างแบบสำรวจความพึงพอใจสวัสดิการประจำปี (Benefits Needs Survey) เพื่อเก็บข้อมูลก่อนปรับปรุงสวัสดิการปีหน้า"
+      ]
+    },
+    {
+      "slug": "hr-tna-training-plan-dsd-th",
+      "title": "วิเคราะห์ TNA แผนอบรม และสิทธิ พ.ร.บ.พัฒนาฝีมือฯ",
+      "subtitle": "TNA & Thailand DSD Training Plan Specialist",
+      "category": "hrd",
+      "summary": "สำรวจ Skill Gap จัดทำ Annual Training Plan และวางแผนอบรมให้ผ่านเกณฑ์ 50% (บริษัท ≥ 100 คน) พร้อมเตรียมเอกสารลดหย่อนภาษี 200% กับ กพร.",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "กลาง–สูง",
+      "laws": ["พ.ร.บ.ส่งเสริมการพัฒนาฝีมือแรงงาน 50% / ภาษี 200%"],
+      "hasLawUpdate2568": true,
+      "outputs": ["TNA Matrix", "แผนอบรมประจำปี", "เช็กลิสต์เอกสาร กพร."],
+      "tags": ["TNA", "Training Plan", "พัฒนาฝีมือแรงงาน", "กพร.", "ภาษี 200%", "HRD"],
+      "featured": true,
+      "examplePrompts": [
+        "บริษัทมีพนักงาน 180 คน ทำธุรกิจจำหน่ายเครื่องมือแพทย์ ปีนี้ต้องการเร่งยอดขายและลดปัญหาการประสานงานข้ามแผนก ช่วยออกแบบแบบฟอร์มเก็บ TNA และแผนฝึกอบรมประจำปีที่ผ่านเกณฑ์ 50% ของกรมพัฒนาฝีมือแรงงานให้หน่อย",
+        "ช่วยวางแผนติดตามผลหลังอบรม (Kirkpatrick Level 3 & 4) สำหรับหลักสูตร 'ทักษะการเป็นหัวหน้างานยุคใหม่' เพื่อให้ผู้บริหารเห็นว่าส่งคนไปอบรมแล้วทำงานดีขึ้นจริง",
+        "ช่วยสรุปเช็กลิสต์เอกสารที่ฝ่าย HR ต้องเตรียมทั้งก่อน ระหว่าง และหลังจัดอบรม In-house Training เพื่อให้ยื่นรับรองกรมพัฒนาฝีมือแรงงานและลดหย่อนภาษี 200% ผ่านฉลุย"
+      ]
+    },
+    {
+      "slug": "hr-idp-competency-career-th",
+      "title": "ออกแบบ Competency, Career Path และแผน IDP",
+      "subtitle": "Competency, Career Path & IDP Architect",
+      "category": "hrd",
+      "summary": "สร้างพจนานุกรมสมรรถนะ 5 ระดับพฤติกรรม ออกแบบเส้นทางสายอาชีพแบบ Dual Track (บริหาร vs ผู้เชี่ยวชาญ) และแผน IDP 70-20-10",
+      "roles": ["specialist", "manager"],
+      "level": "กลาง–สูง",
+      "laws": [],
+      "hasLawUpdate2568": false,
+      "outputs": ["Competency Dictionary", "Career Path Map", "แผน IDP 70-20-10"],
+      "tags": ["Competency", "Career Path", "IDP", "70-20-10", "Skill Gap"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยออกแบบ Competency Dictionary (Core 4 ข้อ + Functional 4 ข้อ) พร้อมคำอธิบายระดับ 1–5 สำหรับสายงาน 'HRBP / HR Generalist' ในบริษัทธุรกิจค้าปลีก",
+        "ช่วยออกแบบ Career Path แบบ Dual Track (สายบริหาร vs สายผู้เชี่ยวชาญ) สำหรับทีม IT & Software Developer ตั้งแต่ระดับ Junior ถึง Principal/Director",
+        "พนักงานตำแหน่ง Senior Account Executive มีทักษะการปิดการขายดีมาก แต่อ่อนเรื่อง 'การวิเคราะห์ตัวเลขกำไร-ขาดทุน' และ 'การสอนงานน้องใหม่' ช่วยเขียนแผน IDP ระยะ 6 เดือนแบบ 70-20-10 ให้หน่อย"
+      ]
+    },
+    {
+      "slug": "hr-training-proposal-facilitator-th",
+      "title": "เขียนโครงการฝึกอบรมและออกแบบคู่มือ Workshop",
+      "subtitle": "Training Proposal & Facilitator Guide",
+      "category": "hrd",
+      "summary": "ร่างเอกสารเสนอโครงการขออนุมัติงบ (หลักการและเหตุผล วัตถุประสงค์ งบประมาณ KPIs) พร้อมโครงสร้างหลักสูตรและ Run Sheet จัด Workshop",
+      "roles": ["generalist", "specialist"],
+      "level": "พื้นฐาน–กลาง",
+      "laws": ["เกณฑ์ชั่วโมงอบรม กพร."],
+      "hasLawUpdate2568": false,
+      "outputs": ["เอกสารเสนอโครงการ", "Course Outline", "Workshop Run Sheet"],
+      "tags": ["เขียนโครงการ", "Project Proposal", "Workshop", "Facilitator", "Course Outline"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยเขียนเอกสารเสนอโครงการ (หลักการและเหตุผล, วัตถุประสงค์, งบประมาณ, KPIs) เรื่อง 'โครงการพัฒนาทักษะการใช้ AI เพื่อเพิ่มประสิทธิภาพงานบริการลูกค้า' สำหรับพนักงาน 60 คน งบประมาณไม่เกิน 50,000 บาท",
+        "ช่วยออกแบบ Course Outline และ Facilitator Guide สำหรับ Workshop ครึ่งวัน (3 ชั่วโมง) หัวข้อ 'การสื่อสารและการให้ Feedback เชิงบวกสำหรับหัวหน้างานมือใหม่' โดยมีกรณีศึกษาคนไทยที่ขี้เกรงใจไม่กล้าตำหนิลูกน้อง",
+        "ช่วยคิดกิจกรรม Ice-breaking ออนไลน์ผ่าน Zoom 15 นาที สำหรับงาน Town Hall หรือเปิดอบรมพนักงานต่างแผนก 40 คนที่ไม่ค่อยคุยกัน"
+      ]
+    },
+    {
+      "slug": "hr-kpi-okr-performance-th",
+      "title": "ออกแบบ KPI/OKR การประเมินผล และแผน PIP",
+      "subtitle": "KPI/OKR, Performance Review & PIP Specialist",
+      "category": "performance",
+      "summary": "ถ่ายทอดเป้าหมายองค์กรเป็น KPI/OKR พร้อมเกณฑ์คะแนน 1–5 แนวทาง Calibration ลดอคติ สคริปต์ Feedback (SBI) และแผน PIP ตามกฎหมายแรงงานไทย",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "กลาง–สูง",
+      "laws": ["พ.ร.บ.คุ้มครองแรงงาน ม.17/118 (PIP)"],
+      "hasLawUpdate2568": false,
+      "outputs": ["KPI Scorecard", "คู่มือ Calibration", "แผนพัฒนา PIP 60 วัน"],
+      "tags": ["KPI", "OKR", "Performance", "Calibration", "PIP", "ประเมินผล"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยออกแบบตาราง KPI (น้ำหนักรวม 100%) พร้อมเกณฑ์คะแนนระดับ 1–5 สำหรับตำแหน่ง 'HR Officer (เน้น Recruitment & Payroll)' และ 'Customer Service Lead'",
+        "องค์กรอยากเปลี่ยนมาใช้ OKR ควบคู่กับ KPI เดิม ช่วยอธิบายวิธีเชื่อมโยง OKR ของทีมการตลาดให้เข้ากับ KPI ประจำปี โดยไม่ให้พนักงานรู้สึกว่างานซ้ำซ้อน",
+        "พนักงานตำแหน่ง Project Coordinator ทำงานพลาดบ่อยและส่งงานไม่ตรงเวลาตลอด 3 เดือน ช่วยออกแบบแผน PIP 60 วัน พร้อมสคริปต์พูดคุยเปิดใจแบบให้เกียรติแต่ชัดเจน"
+      ]
+    },
+    {
+      "slug": "hr-talent-succession-9box-th",
+      "title": "บริหารคนเก่ง 9-Box Grid และแผนสืบทอดตำแหน่ง",
+      "subtitle": "Talent Management, 9-Box & Succession Strategist",
+      "category": "performance",
+      "summary": "แยกเกณฑ์ประเมิน Potential vs Performance จัดกลุ่มใน 9-Box Grid กำหนด Critical Roles และวางแผน Succession Planning + Retention",
+      "roles": ["specialist", "manager"],
+      "level": "สูง",
+      "laws": ["PDPA (การรักษาความลับข้อมูล Talent)"],
+      "hasLawUpdate2568": false,
+      "outputs": ["เกณฑ์ 9-Box Grid", "ตาราง Succession Plan", "แผน Retention"],
+      "tags": ["9-Box Grid", "Talent Management", "Succession Plan", "HiPo", "Retention"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยออกแบบเกณฑ์วัด Potential 4 มิติ (พร้อมแบบประเมิน 1–5) เพื่อใช้ทำ 9-Box Grid ประจำปีสำหรับระดับหัวหน้างานและผู้จัดการ 40 คน",
+        "ผู้จัดการฝ่ายบัญชีและการเงินกำลังจะเกษียณในอีก 18 เดือนข้างหน้า และยังไม่มีคนแทนที่พร้อม 100% ช่วยวาง Succession Plan และตารางเร่งพัฒนาผู้สืบทอดภายใน 18 เดือนให้หน่อย",
+        "พนักงานกลุ่ม Top Talent (Star) ในสายงาน IT และ Data Analytics ลาออกไปบริษัทคู่แข่งบ่อยมาก ช่วยวางแผน Talent Retention Strategy ทั้งด้านการเติบโต งานท้าทาย และค่าตอบแทน"
+      ]
+    },
+    {
+      "slug": "hr-engagement-exit-interview-th",
+      "title": "วิเคราะห์ความผูกพันพนักงานและบทสัมภาษณ์ลาออก",
+      "subtitle": "Employee Engagement & Exit Interview Analyst",
+      "category": "od-hrbp",
+      "summary": "สร้างแบบสำรวจ Engagement & eNPS (คุ้มครองความเป็นนิรนาม) สกัด Root Cause จาก Exit Interview ออกแบบ Stay Interview และแผนลด Turnover",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "กลาง",
+      "laws": ["PDPA (Anonymity)", "พ.ร.บ.คุ้มครองแรงงาน ม.76"],
+      "hasLawUpdate2568": false,
+      "outputs": ["แบบสำรวจ Engagement", "คำถาม Stay Interview", "แผนแก้ Turnover"],
+      "tags": ["Engagement", "eNPS", "Exit Interview", "Stay Interview", "Turnover"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยออกแบบแบบสำรวจ Employee Engagement & eNPS ประจำปี จำนวน 20 ข้อ (แบ่งตาม 6 มิติ + คำถามเปิด) สำหรับองค์กรไทยขนาด 150 คน ที่มีทั้งพนักงานออฟฟิศและพนักงานหน้าร้าน",
+        "นี่คือข้อมูลสรุปเหตุผล Exit Interview แบบไม่ระบุชื่อของพนักงานที่ลาออก 18 คนในไตรมาสที่ผ่านมา ช่วยวิเคราะห์ Root Cause แบ่งเป็น Avoidable vs Unavoidable และเสนอ Action Plan ให้ผู้บริหารหน่อย",
+        "ช่วยร่างแนวทางและบทพูดสำหรับ HR และหัวหน้างานในการทำ Stay Interview 30 นาที กับพนักงานคนเก่งที่มีความเสี่ยงจะลาออก"
+      ]
+    },
+    {
+      "slug": "hr-hrbp-change-org-design-th",
+      "title": "ที่ปรึกษา HRBP โครงสร้างองค์กร และบริหารการเปลี่ยนแปลง",
+      "subtitle": "HRBP, Org Design & Change Management Advisor",
+      "category": "od-hrbp",
+      "summary": "วางกลยุทธ์ HRBP เชื่อมธุรกิจ ออกแบบ Org Chart & RACI Matrix วางแผนกำลังคน Build-Buy-Borrow-Bot และขับเคลื่อนการเปลี่ยนแปลงด้วย ADKAR",
+      "roles": ["manager", "specialist"],
+      "level": "สูง",
+      "laws": ["พ.ร.บ.แรงงานสัมพันธ์", "พ.ร.บ.คุ้มครองแรงงาน ม.120"],
+      "hasLawUpdate2568": false,
+      "outputs": ["ตาราง RACI Matrix", "แผน ADKAR Change", "Workforce 4B Plan"],
+      "tags": ["HRBP", "Org Design", "RACI", "Change Management", "ADKAR", "Workforce Planning"],
+      "featured": false,
+      "examplePrompts": [
+        "บริษัทกำลังจะนำระบบ HRIS และ AI Chatbot มาใช้แทนงานเอกสาร HR และให้หัวหน้างานอนุมัติวันลาผ่านแอปเอง ช่วยวางแผน Change Management แบบ ADKAR ระยะ 3 เดือน พร้อมสคริปต์สื่อสารพนักงานให้หน่อย",
+        "ฝ่ายขายและฝ่ายปฏิบัติการมักโยนความผิดกันเรื่องส่งมอบงานลูกค้าล่าช้า ช่วยออกแบบ RACI Matrix และโครงสร้างการประสานงานใหม่ในฐานะ HRBP ให้หน่อย",
+        "ช่วยวิเคราะห์กลยุทธ์ Workforce Planning แบบ Build-Buy-Borrow-Bot สำหรับแผนกบัญชีและการเงิน 15 คนที่กำลังจะขยายสาขาเพิ่ม 30% ในปีหน้า"
+      ]
+    },
+    {
+      "slug": "hr-people-analytics-dashboard-th",
+      "title": "วิเคราะห์ข้อมูล HR (People Analytics) และรายงานผู้บริหาร",
+      "subtitle": "People Analytics & HR Dashboard Strategist",
+      "category": "analytics-comms",
+      "summary": "กำหนดสูตร HR Metrics มาตรฐาน (Turnover, Time-to-Fill, Absenteeism, Training ROI) ออกแบบ Layout HR Dashboard และสรุป Executive Insight",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "กลาง–สูง",
+      "laws": ["PDPA (Data Anonymization)"],
+      "hasLawUpdate2568": false,
+      "outputs": ["สูตร HR Metrics", "โครงร่าง Dashboard", "Executive Summary"],
+      "tags": ["People Analytics", "Dashboard", "HR Metrics", "Turnover Rate", "Data"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยออกแบบโครงสร้าง HR Dashboard ประจำเดือนสำหรับผู้บริหารบริษัทขนาด 200 คน ที่ต้องแสดง Headcount, Turnover, OT, ขาด-ลา-มาสาย และสรุปงานสรรหา โดยใช้ Google Looker Studio หรือ Power BI พร้อมระบุคอลัมน์ Excel ที่ต้องเตรียม",
+        "นี่คือข้อมูลสรุปรายงานการลาออกและ OT ย้อนหลัง 6 เดือน (ไม่มีชื่อพนักงาน) ช่วยวิเคราะห์แนวโน้ม จุดเสี่ยง และร่าง Executive Summary 1 หน้าสำหรับนำเสนอในประชุมผู้บริหาร",
+        "ช่วยอธิบายวิธีคำนวณและแปลผลค่าสถิติ (ค่าเฉลี่ย, SD, ร้อยละ, NPS) จากแบบประเมินโครงการฝึกอบรมพนักงาน 80 คน เพื่อให้รายงานผลดูเป็นมืออาชีพ"
+      ]
+    },
+    {
+      "slug": "hr-official-comms-policy-th",
+      "title": "ร่างประกาศ นโยบาย HR และหนังสือสื่อสารทางการ",
+      "subtitle": "HR Official Communications & Policy Writer",
+      "category": "analytics-comms",
+      "summary": "ร่างประกาศนโยบายบริษัท (วันลา 2568/ประกันสังคม 2569) บันทึกข้อความภายใน หนังสือราชการ Offer Letter หนังสือรับรอง และ Rejection Letter",
+      "roles": ["generalist", "specialist", "manager"],
+      "level": "พื้นฐาน–กลาง",
+      "laws": ["ระเบียบงานสารบรรณ", "พ.ร.บ.คุ้มครองแรงงาน ฉ.9", "ป.พ.พ. ม.585"],
+      "hasLawUpdate2568": true,
+      "outputs": ["ประกาศนโยบาย + FAQ", "หนังสือราชการ/Memo", "Offer & ใบรับรอง"],
+      "tags": ["ประกาศบริษัท", "นโยบาย HR", "หนังสือราชการ", "Offer Letter", "งานสารบรรณ"],
+      "featured": false,
+      "examplePrompts": [
+        "ช่วยร่าง 'ประกาศบริษัท เรื่อง การปรับปรุงสิทธิการลาคลอดบุตร 120 วัน และสิทธิลาเพื่อช่วยเหลือคู่สมรสคลอดบุตร 15 วัน' ตาม พ.ร.บ.คุ้มครองแรงงาน (ฉบับที่ 9) พ.ศ. 2568 พร้อมส่วนถาม-ตอบ (FAQ) 4 ข้อท้ายประกาศ",
+        "ช่วยร่างจดหมายเสนองาน (Job Offer Letter) แบบสุภาพเป็นมืออาชีพ พร้อมสรุปรายละเอียดค่าตอบแทน วันเริ่มงาน ระยะเวลาทดลองงาน 119 วัน เอกสารวันแรกเข้า และข้อความ PDPA",
+        "ช่วยร่างหนังสือรับรองการทำงาน (ภาษาไทย) และจดหมายแจ้งผลการสัมภาษณ์ที่ไม่ผ่านคัดเลือกแบบรักษาความรู้สึกและสร้างภาพลักษณ์ที่ดีให้องค์กร"
+      ]
+    }
+  ]
+}
